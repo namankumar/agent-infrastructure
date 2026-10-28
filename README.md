@@ -83,4 +83,4 @@ See [the architecture diagram](docs/architecture.md) and [the public export boun
 
 This is intentionally narrow. It does **not** authenticate people, validate authority over a real source system, watch files continuously, discover all relevant work, execute agents, call models, provide multi-user access control, or recover a corrupt database automatically. The source hash protects consistency of the submitted quote, not the authenticity of an external message.
 
-`recover` reports SQLite's integrity check and the recovery action required if it fails. A real deployment needs encrypted backups, identity/authentication, authorization at its service boundary, and source-specific freshness checks.
+The `recover` command is diagnostic: it reports integrity for a database that opens successfully. A corrupt database is rejected during opening with exit status 2 and a JSON error on stderr, before an integrity report is available. It never restores or repairs a database. A real deployment needs backups, identity/authentication, authorization at its service boundary and source-specific freshness checks.

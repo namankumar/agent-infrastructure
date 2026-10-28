@@ -1,9 +1,13 @@
 from __future__ import annotations
 
+import contextlib
+import io
+import json
 import tempfile
 import unittest
 from pathlib import Path
 
+from agent_continuity.cli import main
 from agent_continuity.store import ContinuityStore, Rejected, sha256_text
 
 
@@ -95,3 +99,17 @@ class ContinuityStoreTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class CorruptDatabaseCliTests(unittest.TestCase):
+    def test_corrupt_database_is_rejected_without_restore_claim_or_write(self):
+        with tempfile.TemporaryDirectory() as directory:
+            database = Path(directory) / "broken.sqlite"
+            original = b"not a sqlite database"
+            database.write_bytes(original)
+            error = io.StringIO()
+            with contextlib.redirect_stderr(error):
+                result = main(["--db", str(database), "recover"])
+            self.assertEqual(result, 2)
+            self.assertIs(json.loads(error.getvalue())["ok"], False)
+            self.assertEqual(database.read_bytes(), original)

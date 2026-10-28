@@ -1,0 +1,8 @@
+[project]
+name = "agent-work-continuity"
+version = "0.1.0"
+description = "A stdlib-only example of source-backed, replay-safe agent work state."
+requires-python = ">=3.9"
+
+[project.scripts]
+agent-continuity = "agent_continuity.cli:main"

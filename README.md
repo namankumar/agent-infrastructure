@@ -1,21 +1,60 @@
-# Agent Work Continuity
+# Agent Infrastructure
 
-A tiny, offline Python example of how an agent workflow can preserve durable, source-backed work state without treating a prior chat response as current truth.
+Reliable agent work needs more than a model call. It needs a place to keep evidence, coordinate revisions, reject stale updates, make retries safe, and distinguish a historical receipt from the current state.
 
-It demonstrates four implemented controls:
+This showcase has two deliberately separate layers:
 
-- **Source-backed state:** every recorded work item retains a source ID, exact quote, and SHA-256 hash of that quote.
-- **Stale-write rejection:** callers must supply the state revision they read; an old writer cannot overwrite a newer revision.
-- **Replay safety:** repeating the exact same request ID returns the original immutable receipt. Reusing that ID with changed content is rejected.
-- **Current verification vs. historical receipts:** mutations return historical receipts (`receipt_only: true`). `status` performs a new database read and is explicitly not a mutation receipt.
+1. **Public continuity example:** a small, runnable offline Python package that demonstrates the durable-state controls.
+2. **Broader private system:** a hosted MCP and SQL-backed plugin implementation that applies related controls to agent-assisted work capture, retrieval, correction and coordination. It is described here for architecture context; its code, configuration, records and integrations are not part of the public repository.
 
-`review` also requires a reviewer label distinct from the recorded owner. It is a small separation-of-duties example—not user authentication or production authorization.
+## The engineering problem
 
-No network, API key, model, package install, or workspace dependency is needed. All names and inputs are synthetic.
+An agent can produce a plausible answer while operating on old context, duplicating an earlier action, or overwriting a later human correction. The infrastructure therefore treats work as versioned, source-backed state:
 
-## Run
+- retain the source reference that supports a saved item;
+- read current state before a write, then reject a stale revision;
+- use an idempotency key so an uncertain retry cannot create a second mutation;
+- preserve immutable receipts while making fresh reads explicit;
+- separate proposed work, authorized action and independently verified outcome.
 
-Requires Python 3.9+.
+## Implemented broader architecture
+
+```mermaid
+flowchart LR
+    H[Agent host or user interface] -->|MCP tool request| A[OAuth / consent boundary]
+    A --> M[Hosted MCP transport]
+    U[Plugin UI bridge] <--> M
+    M --> P[Tool policy and input validation]
+    P --> C[Capture and reconciliation harness]
+    C -->|smallest supported diff| S[(Canonical SQL state)]
+    S --> E[(Source references, revisions, receipts and history)]
+    S --> R[Scoped read / UI projection]
+    R --> H
+    V[Independent readback] --> S
+    V --> H
+```
+
+The broader system implements a Streamable HTTP MCP transport, a local MCP runtime, SQL persistence, versioned records, source references, capture/reconciliation flows, a plugin UI bridge, and hosted OAuth controls. Its hosted path validates OAuth authorization-code exchange with PKCE, restricts redirect/origin handling, uses expiring access and refresh grants, and keeps authorization data separate from workspace state.
+
+The coordination harness is not a second agent that silently acts. It is the persistence and reconciliation layer: it retains stable IDs and evidence, applies the smallest valid change, protects manual edits, records receipt/history data, and requires a readback when a write is uncertain.
+
+## Public code vs. broader system
+
+| Capability | Public continuity example | Broader private system |
+| --- | --- | --- |
+| Offline durable state | SQLite record store with source quote hashes, revisions and receipts | Canonical SQL workspace state with source references, history and projections |
+| Concurrency and retries | Expected-revision checks and idempotency-key replay protection | Versioned corrections, atomic batches, replay-safe writes and reconciliation checkpoints |
+| Read semantics | `status` is a fresh read; mutation receipts are explicitly historical | Scoped workspace reads, UI projections and independent readback after uncertain writes |
+| Review and authority | Distinct reviewer/owner labels as a small separation-of-duties example | Tool policy, user authority boundaries and explicit write/correction flows |
+| MCP and UI | Not included | Local MCP runtime, hosted MCP transport and plugin UI bridge |
+| Authentication | Not included | Hosted OAuth authorization-code flow with PKCE, bounded consent, expiring grants and refresh rotation |
+| Operations | No network, install or service configuration | Isolated service configuration and SQL/auth stores; no public records or configuration in this showcase |
+
+The public code does **not** implement MCP transport, OAuth, hosted service deployment, user authentication, provider integrations, model calls, background capture, or multi-user authorization. This document does not claim otherwise.
+
+## Run the public continuity example
+
+The public repository retains the small runnable package and its existing quickstart. From that repository's root:
 
 ```sh
 mkdir -p /tmp/agent-work-continuity-demo
@@ -25,62 +64,20 @@ python3 -m agent_continuity.cli --db /tmp/agent-work-continuity-demo/state.sqlit
 python3 -m agent_continuity.cli --db /tmp/agent-work-continuity-demo/state.sqlite recover
 ```
 
-The first two mutations return receipts with the revision they wrote. The `status` output is the current database read; it includes the saved source reference and review history.
-
-To demonstrate safe replay, rerun the exact `record` command after recording it: it returns the original receipt and does not increment the revision. To demonstrate stale-write rejection, try `examples/review.json` before recording, or change its `expected_revision` to `0` after the record is present.
-
-## Inputs and outputs
-
-`record` accepts one JSON object:
-
-```json
-{
-  "item_id": "routing-contract",
-  "expected_revision": 0,
-  "idempotency_key": "record-routing-v1",
-  "actor": "planner",
-  "summary": "Keep the routing contract source-backed and reviewable.",
-  "source": {
-    "source_id": "demo-note-001",
-    "quote": "Keep the routing contract source-backed and reviewable.",
-    "sha256": "SHA-256 of quote"
-  }
-}
-```
-
-`review` has the same common fields plus `verdict` (`verified` or `needs_changes`) and a source object. Its `actor` must differ from the item owner.
-
-Each successful mutation returns an immutable historical receipt:
-
-```json
-{"item_id":"routing-contract","operation":"record","receipt_only":true,"revision":1,"state":"recorded"}
-```
-
-Use `status ITEM_ID` before a new write. That is what supplies the current revision to place in `expected_revision`.
-
-## Tests
+To run its existing tests:
 
 ```sh
 python3 -m unittest discover -s tests -t . -v
 ```
 
-The suite covers a source reference surviving persistence, exact replay, changed replay rejection, stale-write rejection, self-review rejection, source hash rejection, and SQLite recovery receipts.
+See [the detailed continuity example](docs/continuity-example.md) for input schemas, receipts and diagnostic limits. Requires Python3.9+ and the standard library only.
 
-For a clean-directory check:
+The public example has eight offline tests covering source persistence, exact replay, changed-replay rejection, stale-write rejection, self-review rejection, source-hash rejection and database diagnostics and corrupt-file rejection.
 
-```sh
-tmpdir="$(mktemp -d)"
-cp -R . "$tmpdir/agent-work-continuity"
-cd "$tmpdir/agent-work-continuity"
-python3 -m unittest discover -s tests -t . -v
-```
+## Boundaries
 
-## Architecture and provenance
-
-See [the architecture diagram](docs/architecture.md) and [the public export boundary](docs/provenance.md).
-
-## Limits
-
-This is intentionally narrow. It does **not** authenticate people, validate authority over a real source system, watch files continuously, discover all relevant work, execute agents, call models, provide multi-user access control, or recover a corrupt database automatically. The source hash protects consistency of the submitted quote, not the authenticity of an external message.
-
-The `recover` command is diagnostic: it reports integrity for a database that opens successfully. A corrupt database is rejected during opening with exit status 2 and a JSON error on stderr, before an integrity report is available. It never restores or repairs a database. A real deployment needs backups, identity/authentication, authorization at its service boundary and source-specific freshness checks.
+- Public inputs, actors, source references and work items are synthetic.
+- The public package does not connect to an MCP host or any external service.
+- The broader system is described as implemented architecture, not included source code or a production availability claim.
+- No client workflows, real records, credentials, service configuration, provider endpoints or private implementation paths are included.
+- A source hash establishes consistency of submitted evidence; it does not authenticate an external source by itself.

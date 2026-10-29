@@ -76,3 +76,16 @@ Excluded by design:
 - unselected tests and all real transcript/configuration inputs. The included portable runtime retains its original background-capture source because the actual plugin surface references it, but this export supplies no transcript root, configuration or credential and the verified commands above do not enable or invoke it.
 
 The source includes local background-capture and scheduler setup code. Capture is not configured or enabled by the quickstart: invoking `plugin/setup_capture.py` separately can configure local transcript scanning and a launchd schedule, so review its paths and settings before using it. No model execution or hosted-service access is configured. The optional hosted adapter is code only; deploying it requires a separate security review, isolated configuration and explicit authorization.
+
+## Reproducible evaluation
+
+[Offline scorecard and quickstart](evals/scorecard/README.md) exercise the actual MCP/store code with synthetic fixtures. The [comparison report](evals/scorecard/REPORT.md) keeps software results separate from unrun model tasks and historical native-host limitations. Retrieval misses and a question-only completion mutation are retained as failures; no runtime or prompt remediation is included.
+
+```sh
+python3 evals/scorecard/run.py --trials 3 --output /tmp/todo-scorecard.json
+python3 -m unittest discover -s tests -p 'test_scorecard.py' -v
+```
+
+The scorecard currently exits **1** because S13 exposes an existing semantic-authorization gap. This is a measured product failure, not a broken quickstart; see per-case results. The grader unit tests separately verify that known wrong outcomes fail.
+
+The additional generic skill/policy files bind existing capture instructions for later model comparisons. They are unchanged source, not evidence that model capture was rerun.

@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "provenance": "Purpose-written synthetic data; no imported transcripts, customers, vehicles or operational configuration.",
+  "retrieval": [
+    {"id":"R01","query":"Cedar","question":"What is the current invitation status?","target":"invite","expected_status":"open","exclude":"noise","expected":"pass"},
+    {"id":"R02","query":"Cedar","question":"Has the venue check been completed?","target":"venue","expected_status":"done","exclude":"noise","expected":"pass"},
+    {"id":"R03","query":"Cedar","question":"What is the corrected invitation detail?","target":"invite","expected_detail":"Use the indoor room, not the garden.","exclude":"noise","expected":"pass"},
+    {"id":"R04","query":"mailing","question":"What is the invitation status?","target":"invite","expected_status":"open","exclude":"noise","expected":"known lexical miss; broaden retrieval"},
+    {"id":"R05","query":"review","question":"Which project does the review belong to?","target":"invite","expected_status":"open","exclude":"noise","expected":"ambiguous query includes both projects"}
+  ],
+  "model_tasks": [
+    {"id":"M01","split":"development","turns":["For Cedar, I finished the invitation."],"expected":{"invite_status":"done","new_items":0},"purpose":"Cross-session reference resolves to the existing task; no duplicate."},
+    {"id":"M02","split":"development","turns":["Maybe we could print flyers. What would they cost?"],"expected":{"invite_status":"open","new_items":0},"purpose":"Question and tentative suggestion are not commitments."},
+    {"id":"M03","split":"held-out","turns":["Cedar invitation: waiting for the coordinator.","Actually drop that invitation; we won't send one."],"expected":{"invite_status":"canceled","new_items":0},"purpose":"Withdrawal supersedes waiting; retain the same task."},
+    {"id":"M04","split":"held-out","turns":["When I said the invite was done, I meant only the draft. Reopen it for Cedar."],"expected":{"invite_status":"open","new_items":0},"purpose":"Delayed correction; preserve prior completion history.","initial_done":true},
+    {"id":"M05","split":"held-out","turns":["The Cedar invitation is still on my list. Same one as before."],"expected":{"invite_status":"open","new_items":0},"purpose":"Unseen rephrasing must not duplicate existing work."},
+    {"id":"M06","split":"held-out","turns":["Is it done?"],"expected":{"invite_status":"open","new_items":0,"clarification":true},"purpose":"Ambiguous reference requires clarification; no unsupported mutation."},
+    {"id":"M07","split":"held-out","turns":["For Cedar I will arrange captions for the talk."],"expected":{"invite_status":"open","new_items":1,"new_title":"Arrange captions"},"purpose":"New independent commitment must be a task, not buried in a note."},
+    {"id":"M08","split":"held-out","turns":["What is the current Cedar invitation plan?"],"expected":{"invite_status":"open","new_items":0,"answer":{"detail":"Use the indoor room, not the garden.","status":"open","source_id":"corrected-source"}},"purpose":"Structured final answer uses corrected current state under distractors, not stale garden evidence; prose quality needs separate review."}
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "date_local": "2026-10-28",
+  "kind": "offline software verification; no model/native-host run",
+  "private_project_suite": {
+    "command": "python -m unittest discover -s tests -q",
+    "passed": 181,
+    "seconds": 5.767,
+    "exit_code": 0
+  },
+  "reviewed_public_copy_suite": {
+    "command": "python -m unittest discover -s tests -q",
+    "passed": 84,
+    "seconds": 3.836,
+    "exit_code": 0
+  },
+  "dependencies": {
+    "Flask": "3.1.3",
+    "MarkupSafe": "3.0.4"
+  },
+  "scorecard": {
+    "command": "python3 evals/scorecard/run.py --trials 3",
+    "valid_runs": 69,
+    "contract_passes": 36,
+    "contract_runs": 39,
+    "exit_code": 1,
+    "reason": "S13 accepted question-only completion in all three trials; retained existing runtime failure"
+  },
+  "runtime_export_equality": {
+    "app.py": true,
+    "work.py": true,
+    "priorities.py": true,
+    "records.py": true,
+    "tables.py": true,
+    "boards.py": true,
+    "reconciliation.py": true,
+    "save_preferences.py": true,
+    "plugin/server.py": true,
+    "hosting/web.py": true
+  },
+  "publication_review": {
+    "new_material": "synthetic evaluation, grader tests and generic unchanged capture instructions only",
+    "runtime_changed": false,
+    "private_manifest_included": false,
+    "production_changed": false,
+    "private_parent_history_included": false
+  },
+  "fresh_clone": "pending; updated after isolated committed-copy verification",
+  "limitations": [
+    "Model-task outcomes not reached",
+    "No native host tests",
+    "No general latency/cost gains",
+    "No operational impact measurement",
+    "Multiuser isolation not implemented or tested"
+  ]
+}

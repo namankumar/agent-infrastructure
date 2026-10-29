@@ -1,0 +1,9 @@
+{
+  "scenario": "S10-table-revisions",
+  "initial_observation": "3 of 3 attempts invalid: Unknown create fields",
+  "classification": "fixture/harness error, not product failure",
+  "cause": "The fixture put rows inside the create operation; the real API requires separate row operations.",
+  "repair": "Use the existing test_tables.py contract: create columns, then apply row operations atomically.",
+  "retained_product_failures": ["R04 lexical synonym miss", "R05 ambiguous scope includes distractors"],
+  "claim_boundary": "These retrieval failures are not repaired or excluded from the scorecard. No model accuracy result is inferred from API tests."
+}

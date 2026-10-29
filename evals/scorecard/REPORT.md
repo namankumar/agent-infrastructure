@@ -104,4 +104,8 @@ not a new prompt rollout. Read [the method and trace format](README.md).
 
 The safe public export contains genuine implementation modules plus this synthetic
 evaluation, not private source-repository history. No license was added. Fresh-copy
-privacy review and fresh-clone execution are required before publishing the update.
+privacy review passed for 51 tracked files. A fresh committed-copy clone with a new
+virtual environment passes all 84 included Python tests and reproduces the exact
+69-run scorecard summary, including the S13 failure. The main private project suite
+passes 181 tests. [Verification receipt](verification.json) records the commands,
+counts and export boundary. These software tests do not make the product score green.

@@ -44,7 +44,23 @@
     "production_changed": false,
     "private_parent_history_included": false
   },
-  "fresh_clone": "pending; updated after isolated committed-copy verification",
+  "fresh_clone": {
+    "candidate_commit": "5ceb27f",
+    "method": "git clone --no-local of the committed public candidate before publication",
+    "isolated_dependency_install": {
+      "Flask": "3.1.3",
+      "MarkupSafe": "3.0.4"
+    },
+    "tests_passed": 84,
+    "test_seconds": 3.694,
+    "test_exit_code": 0,
+    "scorecard_exit_code": 1,
+    "scorecard_summary_identical": true,
+    "code_fixture_prompt_hashes_identical": true,
+    "tracked_files_privacy_reviewed": 51,
+    "private_manifest_present": false,
+    "no_private_paths_accounts_credentials_or_database_artifacts_found": true
+  },
   "limitations": [
     "Model-task outcomes not reached",
     "No native host tests",

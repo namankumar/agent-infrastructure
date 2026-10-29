@@ -1,83 +1,78 @@
 # Agent Infrastructure
 
-Reliable agent work needs more than a model call. It needs a place to keep evidence, coordinate revisions, reject stale updates, make retries safe, and distinguish a historical receipt from the current state.
+An allowlisted export of a local agent-work system: SQLite persistence, a browser workspace, an MCP server with an app bridge, and an optional hosted MCP/OAuth adapter.
 
-This showcase has two deliberately separate layers:
+The exported code is source-identical to the reviewed implementation modules, except for one genericized plugin deep link. No database files, captured records, credentials, transcripts, caches, or deployment configuration are included.
 
-1. **Public continuity example:** a small, runnable offline Python package that demonstrates the durable-state controls.
-2. **Broader private system:** a hosted MCP and SQL-backed plugin implementation that applies related controls to agent-assisted work capture, retrieval, correction and coordination. It is described here for architecture context; its code, configuration, records and integrations are not part of the public repository.
-
-## The engineering problem
-
-An agent can produce a plausible answer while operating on old context, duplicating an earlier action, or overwriting a later human correction. The infrastructure therefore treats work as versioned, source-backed state:
-
-- retain the source reference that supports a saved item;
-- read current state before a write, then reject a stale revision;
-- use an idempotency key so an uncertain retry cannot create a second mutation;
-- preserve immutable receipts while making fresh reads explicit;
-- separate proposed work, authorized action and independently verified outcome.
-
-## Implemented broader architecture
+## What runs here
 
 ```mermaid
 flowchart LR
-    H[Agent host or user interface] -->|MCP tool request| A[OAuth / consent boundary]
-    A --> M[Hosted MCP transport]
-    U[Plugin UI bridge] <--> M
-    M --> P[Tool policy and input validation]
-    P --> C[Capture and reconciliation harness]
-    C -->|smallest supported diff| S[(Canonical SQL state)]
-    S --> E[(Source references, revisions, receipts and history)]
-    S --> R[Scoped read / UI projection]
-    R --> H
-    V[Independent readback] --> S
-    V --> H
+    UI[Local browser workspace] --> API[Local HTTP API]
+    MCP[MCP stdio server] --> Store[(SQLite store)]
+    UI --> Store
+    MCP --> UIApp[MCP app bridge]
+    Hosted[Optional hosted MCP adapter] --> Auth[OAuth + PKCE]
+    Auth --> MCP
+    Hosted --> Store
+    Events[Optional bounded event adapter] --> Hosted
 ```
 
-The broader system implements a Streamable HTTP MCP transport, a local MCP runtime, SQL persistence, versioned records, source references, capture/reconciliation flows, a plugin UI bridge, and hosted OAuth controls. Its hosted path validates OAuth authorization-code exchange with PKCE, restricts redirect/origin handling, uses expiring access and refresh grants, and keeps authorization data separate from workspace state.
+- **Local workspace:** tasks, projects, records, tables, boards, priorities, source references, revisions and history live in SQLite.
+- **MCP server:** exposes read, capture, correction, record, table, priority and scoped-workspace tools; it also serves the workspace and chat UI resources.
+- **Coordination controls:** expected versions, atomic updates, stable IDs, immutable source references, idempotent request receipts and readback-oriented mutations.
+- **Hosted adapter:** a Streamable HTTP MCP wrapper with authorization-code OAuth, PKCE verification, redirect/origin checks, expiring access grants and refresh rotation.
+- **Event adapter:** a deliberately bounded experimental webhook implementation with signature verification, callback challenge checks, DNS-rebinding defenses and replay-safe delivery state.
 
-The coordination harness is not a second agent that silently acts. It is the persistence and reconciliation layer: it retains stable IDs and evidence, applies the smallest valid change, protects manual edits, records receipt/history data, and requires a readback when a write is uncertain.
+## Run locally with a blank workspace
 
-## Public code vs. broader system
-
-| Capability | Public continuity example | Broader private system |
-| --- | --- | --- |
-| Offline durable state | SQLite record store with source quote hashes, revisions and receipts | Canonical SQL workspace state with source references, history and projections |
-| Concurrency and retries | Expected-revision checks and idempotency-key replay protection | Versioned corrections, atomic batches, replay-safe writes and reconciliation checkpoints |
-| Read semantics | `status` is a fresh read; mutation receipts are explicitly historical | Scoped workspace reads, UI projections and independent readback after uncertain writes |
-| Review and authority | Distinct reviewer/owner labels as a small separation-of-duties example | Tool policy, user authority boundaries and explicit write/correction flows |
-| MCP and UI | Not included | Local MCP runtime, hosted MCP transport and plugin UI bridge |
-| Authentication | Not included | Hosted OAuth authorization-code flow with PKCE, bounded consent, expiring grants and refresh rotation |
-| Operations | No network, install or service configuration | Isolated service configuration and SQL/auth stores; no public records or configuration in this showcase |
-
-The public code does **not** implement MCP transport, OAuth, hosted service deployment, user authentication, provider integrations, model calls, background capture, or multi-user authorization. This document does not claim otherwise.
-
-## Run the public continuity example
-
-The public repository retains the small runnable package and its existing quickstart. From that repository's root:
+Requires Python 3.9+ and uses only the standard library for the local workspace and MCP server.
 
 ```sh
-mkdir -p /tmp/agent-work-continuity-demo
-python3 -m agent_continuity.cli --db /tmp/agent-work-continuity-demo/state.sqlite record --input examples/record.json
-python3 -m agent_continuity.cli --db /tmp/agent-work-continuity-demo/state.sqlite status routing-contract
-python3 -m agent_continuity.cli --db /tmp/agent-work-continuity-demo/state.sqlite review --input examples/review.json
-python3 -m agent_continuity.cli --db /tmp/agent-work-continuity-demo/state.sqlite recover
+mkdir -p /tmp/agent-infrastructure-demo
+python3 app.py --db /tmp/agent-infrastructure-demo/workspace.sqlite serve --port 18473
 ```
 
-To run its existing tests:
+Open `http://127.0.0.1:18473`. This creates a new empty SQLite database at the path you supplied; it does not load any existing data.
+
+To run the actual MCP server against a separate empty database:
 
 ```sh
-python3 -m unittest discover -s tests -t . -v
+python3 plugin/server.py --workspace . --db /tmp/agent-infrastructure-demo/workspace.sqlite
 ```
 
-See [the detailed continuity example](docs/continuity-example.md) for input schemas, receipts and diagnostic limits. Requires Python3.9+ and the standard library only.
+It speaks JSON-RPC over stdin/stdout. The included `plugin/mcp.json` is the actual portable launch contract for a plugin host; it points at the bundled runtime copy. Use the direct command above for a standalone local check.
 
-The public example has eight offline tests covering source persistence, exact replay, changed-replay rejection, stale-write rejection, self-review rejection, source-hash rejection and database diagnostics and corrupt-file rejection.
+## Tests
 
-## Boundaries
+The local-store, MCP and browser-HTTP tests run with the standard library:
 
-- Public inputs, actors, source references and work items are synthetic.
-- The public package does not connect to an MCP host or any external service.
-- The broader system is described as implemented architecture, not included source code or a production availability claim.
-- No client workflows, real records, credentials, service configuration, provider endpoints or private implementation paths are included.
-- A source hash establishes consistency of submitted evidence; it does not authenticate an external source by itself.
+```sh
+python3 -m unittest discover -s tests -p 'test_store.py' -v
+python3 -m unittest discover -s tests -p 'test_priorities.py' -v
+python3 -m unittest discover -s tests -p 'test_http.py' -v
+python3 -m unittest discover -s tests -p 'test_plugin.py' -v
+python3 -m unittest discover -s tests -p 'test_private_mcp.py' -v
+```
+
+The hosted OAuth/MCP and event tests require Flask and MarkupSafe. Install them only in an isolated local environment; the tests use temporary SQLite files and fictional configuration and do not contact a hosted service:
+
+```sh
+python3 -m pip install Flask MarkupSafe
+python3 -m unittest discover -s tests -p 'test_hosted_mcp.py' -v
+python3 -m unittest discover -s tests -p 'test_mcp_events.py' -v
+```
+
+## Export boundary
+
+Included source is limited to the local store/UI, MCP transport and UI bridge, optional hosted OAuth/MCP and event adapters, and their selected synthetic tests.
+
+Excluded by design:
+
+- SQLite databases, backups, caches and generated logs;
+- captured conversations, evaluations, records and other fixture data tied to real use;
+- hosted configuration, OAuth client material, access keys, webhook secrets and service endpoints;
+- deployment scripts, host-specific setup, product history and operational documentation;
+- unselected tests and all real transcript/configuration inputs. The included portable runtime retains its original background-capture source because the actual plugin surface references it, but this export supplies no transcript root, configuration or credential and the verified commands above do not enable or invoke it.
+
+The source includes local background-capture and scheduler setup code. Capture is not configured or enabled by the quickstart: invoking `plugin/setup_capture.py` separately can configure local transcript scanning and a launchd schedule, so review its paths and settings before using it. No model execution or hosted-service access is configured. The optional hosted adapter is code only; deploying it requires a separate security review, isolated configuration and explicit authorization.

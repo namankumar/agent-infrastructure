@@ -1,0 +1,22 @@
+{
+  "name": "personal-todo",
+  "version": "0.7.10",
+  "description": "Your local task workspace: capture, projects, priorities and evidence.",
+  "author": {
+    "name": "Naman Kumar"
+  },
+  "mcpServers": "./.mcp.json",
+  "interface": {
+    "displayName": "Todo",
+    "shortDescription": "Capture, projects and priorities on this Mac",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "Open my Todo workspace"
+    ]
+  },
+  "skills": "./skills/"
+}

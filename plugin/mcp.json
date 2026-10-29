@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "personal-todo": {
+      "type": "stdio",
+      "command": "python3",
+      "args": [
+        "${PLUGIN_ROOT}/server.py",
+        "--workspace",
+        "${PLUGIN_ROOT}/runtime",
+        "--portable"
+      ],
+      "cwd": "${PLUGIN_ROOT}"
+    }
+  },
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json"
+}

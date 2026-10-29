@@ -1,0 +1,53 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chat tasks</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#fafbf8;color:#253b30;font:18px/1.5 system-ui,sans-serif}main{max-width:760px;padding:22px;margin:auto}h1{font-size:23px;margin:0}h2{font-size:18px;margin:18px 0 8px}p{margin:6px 0 14px}.muted,small{color:#637168;font-size:14px}button,select,input,textarea{font:inherit;border:1px solid #cbd5cc;background:white;color:inherit;border-radius:9px;padding:8px 12px}button{cursor:pointer}button:disabled{opacity:.5;cursor:wait}button:focus-visible,select:focus-visible{outline:3px solid #649a7b}button.primary{background:#315f4d;color:white}header,.actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}header{justify-content:space-between;margin-bottom:16px}.task{border-bottom:1px solid #dce4db;padding:13px 0}.task strong{display:block;font-size:18px}.actions{margin-top:10px}.actions button{font-size:14px}details{margin:12px 0}summary{cursor:pointer;font-size:14px}blockquote{font-size:15px;border-left:3px solid #cbd5cc;margin:10px 0;padding-left:12px}#notice{font-size:14px}#notice:empty{display:none}select{max-width:100%;font-size:15px}dialog{border:1px solid #cbd5cc;border-radius:14px;width:min(540px,95vw)}dialog::backdrop{background:#20382b66}label{display:block;margin:10px 0}input,textarea{width:100%}textarea{min-height:90px}#mode{font-size:13px;color:#637168}a{color:#315f4d}
+</style><main>
+<header><h1>Chat tasks</h1><button id="refresh">Refresh</button></header>
+<p id="mode">Connecting to your workspace…</p><div id="content"></div>
+<p id="notice" role="status" aria-live="polite"></p>
+<div class="actions"><button id="expand">Keep beside chat</button><button id="home">Global home ↗</button></div>
+<details><summary>Change context</summary><label>Project view<select id="project"><option value="">Choose a project</option></select></label><p class="muted">Project views include its shared tasks across chats. Ask @Personal Todo to show a specific set of tasks from this conversation.</p><button id="clear">Clear context</button></details>
+</main>
+<dialog id="editor"><form id="edit-form"><h2>Correct task</h2><label>Title<input id="title" required></label><label>Context<textarea id="detail"></textarea></label><label>Why this changed<textarea id="reason" required></textarea></label><p id="error" role="alert"></p><div class="actions"><button type="button" id="cancel">Cancel</button><button class="primary">Save</button></div></form></dialog>
+<script>
+/* HOST_BRIDGE */
+const $=id=>document.getElementById(id);function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n}
+let scope={},data=null,ready=false,generation=0,showAll=false,busy=false,editing=null,editAttempt=null,inputReceived=false;
+const HOME='codex://plugins/agent-infrastructure/app/open_workspace';
+function normalizeScope(value){const result={};for(const key of ['project_ids','item_ids'])if(Array.isArray(value?.[key]))result[key]=value[key];return result}
+function remember(){try{window.openai?.setWidgetState?.({todoScope:scope})}catch(e){/* Host may not offer restoration. */}}
+function setScope(value){scope=normalizeScope(value);generation++;data=null;showAll=false;$('content').replaceChildren();$('mode').textContent='Loading selected context…';$('notice').textContent='';$('editor').close();remember();if(ready)refresh()}
+window.addEventListener('message',event=>{if(event.source!==window.parent)return;const m=event.data;if(m?.jsonrpc!=='2.0')return;
+ if(m.method==='ui/notifications/tool-input'){inputReceived=true;const incoming=normalizeScope(m.params?.arguments||{});setScope(Object.values(incoming).some(ids=>ids.length)?incoming:(window.openai?.widgetState?.todoScope||{}))}
+ if(m.method==='ui/notifications/host-context-changed'&&m.params?.displayMode)$('expand').hidden=m.params.displayMode==='fullscreen';
+});
+window.addEventListener('todo-host-ready',e=>{$('expand').hidden=e.detail?.hostContext?.displayMode==='fullscreen'});
+async function tool(name,args){const r=await hostRequest('tools/call',{name,arguments:args});if(r.isError)throw Error(r.content?.find(c=>c.type==='text')?.text||'Could not save');return r.structuredContent||r._meta||JSON.parse(r.content.find(c=>c.type==='text').text)}
+async function refresh(){const run=++generation;try{const next=await tool('read_chat',scope);if(run!==generation)return;if(JSON.stringify(data)===JSON.stringify(next))return;data=next;render()}catch(e){if(run!==generation)return;data=null;$('content').replaceChildren();$('mode').textContent='Context unavailable';$('notice').textContent=e.message+' Use Change context to choose current records.'}}
+function render(){
+ if(!data)return;
+ $('content').replaceChildren();$('project').replaceChildren(el('option','Choose a project'));$('project').firstChild.value='';for(const p of data.project_choices){const o=el('option',p.name);o.value=p.id;$('project').append(o)}$('project').value=scope.project_ids?.length===1?scope.project_ids[0]:'';
+ const linked=(scope.project_ids?.length||0)+(scope.item_ids?.length||0)>0;
+ $('mode').textContent=linked?(scope.project_ids?.length?'Project context · shared across chats':'Selected conversation tasks'):'No context linked to this panel';
+ if(!linked){$('content').append(el('p','Choose a project below, or ask @Personal Todo to show the tasks relevant to this chat.'));return}
+ for(const p of data.projects){$('content').append(el('h2',p.name),el('p',p.objective,'muted'))}
+ const ranks=new Map(data.focus.map((r,i)=>[r.item_id,i]));const active=data.items.filter(i=>['task','goal'].includes(i.kind)&&!['done','parked','canceled'].includes(i.status)).sort((a,b)=>(ranks.get(a.id)??999)-(ranks.get(b.id)??999));
+ if(!active.length)$('content').append(el('p','No active tasks in this context.'));
+ for(const item of (showAll?active:active.slice(0,3))){const row=el('section',undefined,'task');row.append(el('strong',item.title));const focus=data.focus.find(r=>r.item_id===item.id);const status=[item.kind==='goal'?'Goal':null,item.status!=='open'?item.status:null,focus?(focus.authority==='user'?'Your priority':'Inferred priority'):null].filter(Boolean).join(' · ');if(status)row.append(el('small',status));
+ if(item.blocker)row.append(el('p','Waiting on: '+item.blocker,'muted'));
+ if(item.kind==='goal'){const next=data.items.find(i=>i.id===item.next_action_id);row.append(el('p',next?'Next: '+next.title:item.next_action_id?'Next action is outside this view.':'No next action linked.','muted'))}
+ const actions=el('div',undefined,'actions');for(const [label,status] of [['Done','done'],['Later','parked']]){const b=el('button',label);b.disabled=busy;b.onclick=()=>change(item,{status},'I marked this '+status+' in Chat tasks.');actions.append(b)}const b=el('button','Edit');b.disabled=busy;b.onclick=()=>{editing=item;editAttempt=null;$('title').value=item.title;$('detail').value=item.detail;$('reason').value='';$('error').textContent='';$('editor').showModal()};actions.append(b);row.append(actions);
+ const detail=el('details');detail.append(el('summary','Context & sources'));if(item.detail)detail.append(el('p',item.detail));if(focus)detail.append(el('p',focus.reason,'muted'));for(const e of data.evidence.filter(e=>e.item_id===item.id))detail.append(el('blockquote',e.quote));row.append(detail);$('content').append(row)}
+ if(active.length>3){const more=el('button',showAll?'Show fewer':`Show ${active.length-3} more`);more.onclick=()=>{showAll=!showAll;render()};$('content').append(more)}
+ const inactive=data.items.filter(i=>['task','goal'].includes(i.kind)&&['done','parked','canceled'].includes(i.status));if(inactive.length){const d=el('details');d.append(el('summary',`${inactive.length} completed, canceled or saved for later`));for(const item of inactive){const row=el('p',item.title+' · '+item.status+' ');const b=el('button','Reopen');b.disabled=busy;b.onclick=()=>change(item,{status:'open'},'I reopened this in Chat tasks.');row.append(b);d.append(row)}$('content').append(d)}
+ const context=data.items.filter(i=>!['task','goal'].includes(i.kind));if(context.length){const d=el('details');d.append(el('summary',`${context.length} decisions, ideas & context`));for(const i of context)d.append(el('p',i.title),el('p',i.detail,'muted'));$('content').append(d)}
+}
+async function change(item,changes,reason,requestId){if(busy)return false;busy=true;render();try{await tool('ui_correct',{payload:{item_id:item.id,version:item.version,changes,reason,request_id:requestId||crypto.randomUUID()}});$('notice').textContent='Saved everywhere.';await refresh();return true}catch(e){$('notice').textContent=e.message;await refresh();return false}finally{busy=false;if(data)render()}}
+$('project').onchange=()=>{if($('project').value)setScope({project_ids:[$('project').value]})};$('clear').onclick=()=>setScope({});$('refresh').onclick=refresh;
+$('expand').onclick=async()=>{try{const r=await hostRequest('ui/request-display-mode',{mode:'fullscreen'});if(r.mode!=='fullscreen')throw Error('Host kept this inline');$('expand').hidden=true}catch(e){$('notice').textContent='This host did not open a panel. Use the card’s expand control or Chat tasks in the conversation panel menu.'}};
+$('home').onclick=async()=>{try{const r=await hostRequest('ui/open-link',{url:HOME});if(r.isError)throw Error('Unavailable')}catch(e){$('notice').textContent='Open Personal Todo from the main sidebar, or ask @Personal Todo to open the global workspace.'}};
+$('cancel').onclick=()=>$('editor').close();$('edit-form').onsubmit=async e=>{e.preventDefault();const changes={title:$('title').value,detail:$('detail').value};const reason=$('reason').value;const sig=JSON.stringify({changes,reason});if(!editAttempt||editAttempt.sig!==sig)editAttempt={sig,id:crypto.randomUUID()};if(await change(editing,changes,reason,editAttempt.id))$('editor').close();else $('error').textContent='Your draft is preserved. Close and reopen the task to reconcile the latest version.'};
+connectHost().then(()=>{if(!inputReceived)scope=normalizeScope(window.openai?.widgetState?.todoScope||{});ready=true;return refresh()}).catch(e=>{$('mode').textContent='Workspace connection unavailable';$('notice').textContent=e.message});
+setInterval(()=>{if(ready&&!busy&&!document.hidden&&!$('editor').open)refresh()},30000);
+window.addEventListener('focus',()=>{if(ready&&!busy&&!$('editor').open)refresh()});
+</script></html>

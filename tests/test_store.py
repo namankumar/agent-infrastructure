@@ -1,115 +1,47 @@
-from __future__ import annotations
-
-import contextlib
-import io
+import copy
 import json
 import tempfile
 import unittest
 from pathlib import Path
+from app import Store, Conflict
 
-from agent_continuity.cli import main
-from agent_continuity.store import ContinuityStore, Rejected, sha256_text
+class StoreTests(unittest.TestCase):
+ def setUp(self):
+  self.tmp=tempfile.TemporaryDirectory();self.path=Path(self.tmp.name)/'test.sqlite';self.s=Store(self.path)
+  self.batch={'id':'b1','sources':[{'id':'s1','label':'User test source','text':'Build a local proof. Maybe add a recorder later.'}],'projects':[{'id':'p1','name':'Capture','objective':'Build a local proof','source_id':'s1','quote':'Build a local proof.'}],'items':[{'id':'i1','project_id':'p1','kind':'task','title':'Build local proof','detail':'No stated deadline','evidence':[{'source_id':'s1','quote':'Build a local proof.'}]},{'id':'i2','project_id':'p1','kind':'idea','title':'Recorder','detail':'Tentative future idea','evidence':[{'source_id':'s1','quote':'Maybe add a recorder later.'}]}]}
+ def tearDown(self): self.s.close();self.tmp.cleanup()
+ def test_restart_and_replay(self):
+  self.s.apply(self.batch);self.s.close();self.s=Store(self.path)
+  self.assertTrue(self.s.apply(self.batch)['replayed']);self.assertEqual(len(self.s.snapshot()['items']),2)
+ def test_failed_quote_rolls_back_whole_batch(self):
+  self.batch['items'][1]['evidence'][0]['quote']='Invented deadline tomorrow'
+  with self.assertRaises(ValueError):self.s.apply(self.batch)
+  self.assertEqual(self.s.snapshot()['sources'],[]);self.assertEqual(self.s.snapshot()['items'],[])
+ def test_reused_batch_conflicts(self):
+  self.s.apply(self.batch);self.batch['items'][0]['title']='Something else'
+  with self.assertRaises(Conflict):self.s.apply(self.batch)
+ def test_stale_correction_preserves_history(self):
+  self.s.apply(self.batch);self.s.correct('i1',1,{'title':'Prove capture'},'Better title','r1')
+  with self.assertRaises(Conflict):self.s.correct('i1',1,{'title':'Overwritten'},'Stale edit','r2')
+  state=self.s.snapshot();self.assertEqual(state['items'][0]['title'],'Prove capture');self.assertEqual(len(state['events']),3)
+  self.assertTrue(self.s.correct('i1',1,{'title':'Prove capture'},'Better title','r1')['replayed'])
+ def test_idea_not_done_and_no_dates(self):
+  self.s.apply(self.batch)
+  with self.assertRaises(ValueError):self.s.correct('i2',1,{'status':'done'},'Done','r1')
+  self.assertEqual(self.s.snapshot()['items'][1]['kind'],'idea');self.assertNotIn('due',self.s.snapshot()['items'][0])
+ def test_missing_project_rolls_back(self):
+  self.batch['items'][1]['project_id']='absent'
+  with self.assertRaises(Exception):self.s.apply(self.batch)
+  self.assertEqual(self.s.snapshot()['items'],[])
+ def test_source_immutable_and_pending(self):
+  self.s.capture('note','Note','hello')
+  with self.assertRaises(Conflict):self.s.capture('note','Note','changed')
+  self.assertEqual(self.s.snapshot()['sources'][0]['processed'],0)
+ def test_semantic_id_reuse_no_duplicate(self):
+  self.s.apply(self.batch);other=copy.deepcopy(self.batch);other['id']='b2';self.s.apply(other)
+  self.assertEqual(len(self.s.snapshot()['items']),2);self.assertEqual(len(self.s.snapshot()['events']),2)
+ def test_done_is_report_not_verified_execution(self):
+  self.s.apply(self.batch);self.s.correct('i1',1,{'status':'done'},'I completed it','r1')
+  self.assertIn('user-reported',self.s.snapshot()['sources'][-1]['label'])
 
-
-def source(source_id: str, quote: str) -> dict[str, str]:
-    return {"source_id": source_id, "quote": quote, "sha256": sha256_text(quote)}
-
-
-class ContinuityStoreTests(unittest.TestCase):
-    def setUp(self) -> None:
-        self.tmp = tempfile.TemporaryDirectory()
-        self.store = ContinuityStore(Path(self.tmp.name) / "state.sqlite")
-
-    def tearDown(self) -> None:
-        self.store.close()
-        self.tmp.cleanup()
-
-    def record(self, key: str = "record-1", revision: int = 0, summary: str = "Keep state source-backed.") -> dict:
-        return self.store.apply(
-            "record",
-            {
-                "item_id": "item-1",
-                "expected_revision": revision,
-                "idempotency_key": key,
-                "actor": "owner",
-                "summary": summary,
-                "source": source("turn-1", summary),
-            },
-        )
-
-    def test_persists_source_and_current_receipt_is_distinct_from_status(self) -> None:
-        receipt = self.record()
-        status = self.store.status("item-1")
-        self.assertTrue(receipt["receipt_only"])
-        self.assertFalse(status["receipt_only"])
-        self.assertTrue(status["current_read"])
-        self.assertEqual(status["source"]["source_id"], "turn-1")
-        self.assertEqual(status["revision"], 1)
-
-    def test_exact_replay_returns_original_receipt_without_new_revision(self) -> None:
-        first = self.record()
-        replay = self.record()
-        self.assertEqual(replay, first)
-        self.assertEqual(self.store.status("item-1")["revision"], 1)
-
-    def test_same_idempotency_key_with_different_payload_is_rejected(self) -> None:
-        self.record()
-        with self.assertRaisesRegex(Rejected, "idempotency key reused"):
-            self.record(summary="Different scope")
-        self.assertEqual(self.store.status("item-1")["revision"], 1)
-
-    def test_stale_writer_is_rejected_without_overwriting_newer_state(self) -> None:
-        self.record()
-        self.record(key="record-2", revision=1, summary="Revised scope")
-        with self.assertRaisesRegex(Rejected, "stale revision"):
-            self.record(key="stale-write", revision=1, summary="Old writer overwrite")
-        self.assertEqual(self.store.status("item-1")["revision"], 2)
-        self.assertEqual(self.store.status("item-1")["source"]["quote"], "Revised scope")
-
-    def test_owner_cannot_review_own_work_but_independent_reviewer_can(self) -> None:
-        self.record()
-        same_actor = {
-            "item_id": "item-1", "expected_revision": 1, "idempotency_key": "review-owner",
-            "actor": "owner", "verdict": "verified", "source": source("review-1", "Looks good"),
-        }
-        with self.assertRaisesRegex(Rejected, "independent"):
-            self.store.apply("review", same_actor)
-        accepted = {**same_actor, "actor": "reviewer", "idempotency_key": "review-independent"}
-        receipt = self.store.apply("review", accepted)
-        self.assertEqual(receipt["state"], "verified")
-        self.assertEqual(self.store.status("item-1")["reviews"][0]["actor"], "reviewer")
-
-    def test_invalid_source_hash_is_rejected_before_state_write(self) -> None:
-        payload = {
-            "item_id": "item-1", "expected_revision": 0, "idempotency_key": "invalid-source",
-            "actor": "owner", "summary": "Keep state source-backed.",
-            "source": {"source_id": "turn-1", "quote": "Keep state source-backed.", "sha256": "0" * 64},
-        }
-        with self.assertRaisesRegex(Rejected, "hash"):
-            self.store.apply("record", payload)
-        with self.assertRaisesRegex(Rejected, "not found"):
-            self.store.status("item-1")
-
-    def test_recovery_receipt_reports_integrity_check(self) -> None:
-        self.record()
-        receipt = self.store.recover()
-        self.assertEqual(receipt["integrity"], "ok")
-        self.assertEqual(receipt["schema_version"], 1)
-
-
-if __name__ == "__main__":
-    unittest.main()
-
-
-class CorruptDatabaseCliTests(unittest.TestCase):
-    def test_corrupt_database_is_rejected_without_restore_claim_or_write(self):
-        with tempfile.TemporaryDirectory() as directory:
-            database = Path(directory) / "broken.sqlite"
-            original = b"not a sqlite database"
-            database.write_bytes(original)
-            error = io.StringIO()
-            with contextlib.redirect_stderr(error):
-                result = main(["--db", str(database), "recover"])
-            self.assertEqual(result, 2)
-            self.assertIs(json.loads(error.getvalue())["ok"], False)
-            self.assertEqual(database.read_bytes(), original)
+if __name__=='__main__':unittest.main()

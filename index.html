@@ -1,0 +1,268 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Your workspace</title>
+<style>
+:root{font:19px/1.55 system-ui,sans-serif;color:#26332d;background:#f7f7f2}*{box-sizing:border-box}body{margin:0}main{display:grid;grid-template-columns:245px 1fr;min-height:100vh}aside{padding:36px 22px;background:#eeeee7;border-right:1px solid #ddd}article{width:min(920px,100%);padding:40px 45px}h1{font-size:36px;letter-spacing:-1px;margin:0}h2{font-size:24px;margin:32px 0 12px}h3{font-size:20px;margin:0}p{margin:9px 0}button,input,textarea,select{font:inherit}button{cursor:pointer;border:1px solid #ccd4c9;background:white;border-radius:8px;padding:7px 13px;color:inherit}button:hover{background:#e8eee4}button.active,.primary{background:#264d3e;color:white}aside button{display:block;text-align:left;width:100%;margin:8px 0}textarea,input,select{width:100%;border:1px solid #c9cfc5;border-radius:8px;padding:10px;background:white;color:inherit}textarea{min-height:105px;resize:vertical}.muted{color:#687468;font-size:16px}.card{background:white;padding:20px;border:1px solid #dde0d5;border-radius:12px;margin:12px 0}.tag{font-size:14px;background:#eef1e9;padding:3px 8px;border-radius:20px;margin-right:8px}summary{cursor:pointer;color:#556b5c;font-size:16px;margin-top:12px}blockquote{border-left:3px solid #cbd5c3;padding-left:14px;margin:14px 0;white-space:pre-wrap;font-size:17px}#notice{min-height:30px;color:#345b45}header{margin-bottom:25px}.row{display:flex;gap:10px;margin:10px 0}.row>*{flex:1}form label{display:block;font-size:16px;margin:10px 0}dialog{border:1px solid #ccd4c9;border-radius:16px;width:min(620px,95vw);color:inherit}dialog::backdrop{background:#26332d66}#capture-form{margin-bottom:28px}footer{margin-top:40px}pre{white-space:pre-wrap;font:14px/1.5 system-ui}@media(max-width:700px){main{display:block}aside{padding:15px}aside button{display:inline-block;width:auto;margin-right:6px}article{padding:24px 18px}}
+
+article{width:100%;min-width:0}main{grid-template-columns:220px minmax(0,1fr)}
+.board-toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:12px 0 24px}.board-toolbar select{width:auto;max-width:320px}
+.board{display:grid;grid-template-columns:repeat(5,minmax(250px,1fr));gap:16px;overflow-x:auto;padding-bottom:22px;align-items:start}
+.lane{background:#edf0e9;border-radius:14px;padding:12px;min-height:260px;border:2px solid transparent}.lane.over{border-color:#315f4d}.lane h2{margin:0 0 12px;font-size:18px}.lane .card{padding:15px;margin:10px 0}.lane .card h3{font-size:18px;line-height:1.4;margin:12px 0}.card[draggable=true]{cursor:grab}.card select{font-size:14px;padding:5px;margin-top:12px}.inferred{background:#fff0cd;color:#755314}.chosen{background:#d8eee1;color:#24543d}.card .muted{font-size:14px}.board-intro{background:#e7eee4;border-radius:12px;padding:16px;margin:15px 0}.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.project-grid button{text-align:left;padding:20px}.project-grid strong{display:block;margin-bottom:8px}.compact-note{font-size:15px;line-height:1.5}#capture-form textarea{min-height:70px}.card-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.card-actions button{font-size:14px;padding:5px 9px}
+
+:root{color-scheme:light dark;--paper:light-dark(#fff,#202620);--ink:light-dark(#253027,#eef1ec);--soft:light-dark(#f4f6f2,#2a322a);--line:light-dark(#dfe5dc,#414b41);--quiet:light-dark(#657065,#b2bbb0);background:var(--paper);color:var(--ink);font-size:18px}
+main{display:block;min-height:0}aside{display:flex;align-items:center;gap:28px;padding:17px 28px;background:var(--paper);border:0;border-bottom:1px solid var(--line)}aside strong{font-size:23px}nav{display:flex;gap:16px;align-items:center;flex-wrap:wrap}aside button{width:auto;display:inline-block;margin:0}aside select{width:auto;max-width:290px}aside details{position:relative}article{max-width:1280px;margin:auto;padding:30px}h1{font-size:30px;letter-spacing:0;font-weight:500}h2{font-weight:500}header{margin-bottom:18px}button,input,textarea,select,dialog,.card{color:var(--ink);background:var(--paper);border-color:var(--line)}button:hover,button.active{background:var(--soft);color:var(--ink)}.muted,summary{color:var(--quiet)}.tag{background:var(--soft)}.primary{background:var(--ink);color:var(--paper)}.capture-toggle{margin-bottom:12px}.capture-toggle summary{font-size:14px}#capture-form{max-width:680px;margin:12px 0}#notice:empty{display:none}#notice{font-size:14px;color:var(--quiet)}.project-status{background:var(--soft);padding:16px;border-radius:8px;margin:20px 0 30px;font-size:16px}.stage-board{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;align-items:start}.stage-column{min-width:0}.stage-heading{border-bottom:2px solid var(--line);padding:0 3px 20px;margin-bottom:14px;min-height:77px}.stage-heading h2{font-size:18px;margin:5px 0 0}.stage-column.current .stage-heading{border-color:var(--ink)}.stage-column.over{background:var(--soft)}.task-card{display:flex;gap:11px;padding:14px 12px;border:1px solid var(--line);border-radius:8px;margin:10px 0;background:var(--paper)}.task-card[draggable=true]{cursor:grab}.task-card input[type=checkbox],.step-row input{width:17px;height:17px;margin:5px 0 0;flex-shrink:0;accent-color:var(--ink)}.task-body{min-width:0;flex:1}.task-open{background:none;border:0;padding:0;text-align:left;border-radius:0;font-size:17px;line-height:1.45;overflow-wrap:anywhere}.task-open:hover{background:none;text-decoration:underline}.task-meta{font-size:13px;color:var(--quiet);margin-top:6px}.project-label{display:block;border:0;padding:2px 6px;background:var(--soft);font-size:13px;margin-top:7px}.completed .task-open{text-decoration:line-through;color:var(--quiet)}.supporting{border-top:1px solid var(--line);margin-top:27px;padding-top:13px}.context-link{display:block;margin:10px 0;font-size:16px;text-align:left}.today-list{max-width:760px}.today-list .task-card{border:0;border-bottom:1px solid var(--line);border-radius:0;padding:20px 0}.task-description{white-space:pre-wrap;font-size:16px}.step-row{display:flex;gap:12px;margin:15px 0;font-size:16px}#task-detail h2{padding-right:60px}#task-detail label{display:block;margin:15px 0}#task-detail label.step-row{display:flex}dialog{max-height:85vh;overflow:auto}dialog::backdrop{background:#0006}#task-detail pre{font-size:13px}.supporting form{max-width:520px}.row{flex-wrap:wrap}
+@media(max-width:700px){aside{padding:14px;gap:14px;flex-wrap:wrap}aside select{max-width:220px}article{padding:22px 16px}.stage-board{grid-template-columns:repeat(2,minmax(0,1fr))}.stage-heading{min-height:100px}}@media(max-width:440px){.stage-board{grid-template-columns:1fr}.stage-heading{min-height:0}.task-open{font-size:17px}}
+
+.living-table{border-collapse:collapse;min-width:100%}.living-table th,.living-table td{padding:8px;border-bottom:1px solid #424a43;text-align:left;min-width:110px}.living-table input{min-width:100px;width:100%;box-sizing:border-box}.living-table td:has(input[type=text]){min-width:200px}.living-table th button{border:0;background:transparent;padding:4px;text-align:left}.living-table input{border-color:transparent;background:transparent}.living-table input:focus{border-color:#5b8064}.living-table input[type=checkbox]{min-width:0;width:auto}</style>
+<main><aside><strong>Todo</strong><nav id="projects" aria-label="Workspace"></nav></aside><article><header><button id="refresh-workspace" style="float:right">Refresh</button><h1 id="heading">Everything captured</h1><p id="objective" class="muted"></p></header>
+<details id="save-preferences"><summary>Saving preferences</summary><div id="save-options"></div></details>
+<details class="capture-toggle"><summary>Capture a note</summary><form id="capture-form"><label for="capture">Get it out of your head.</label><textarea id="capture" placeholder="A thought, a promise, a messy note…" required></textarea><div class="row"><button class="primary" type="submit">Save note</button></div><p class="muted">Saved immediately. Organized automatically when capture is enabled.</p></form></details>
+<div id="notice" role="status" aria-live="polite"></div><div id="content"></div></article></main>
+<dialog id="task-view"><button type="button" id="task-close" style="float:right">Close</button><div id="task-detail"></div></dialog>
+<dialog id="editor"><form id="edit-form"><h2>Correct this item</h2><label>Title<input id="edit-title" required></label><label>Project<select id="edit-project"></select></label><div class="row"><label>Kind<select id="edit-kind"><option value="task">Task</option><option value="goal">Goal</option><option value="idea">Idea</option><option value="decision">Decision</option><option value="context">Context</option></select></label><label>Status<select id="edit-status"><option value="open">Open</option><option value="waiting">Waiting</option><option value="blocked">Blocked</option><option value="parked">Parked</option><option value="canceled">Canceled</option><option value="done">Done (I confirm)</option></select></label></div><label>Context<textarea id="edit-detail"></textarea></label><label>Next action (for a goal)<select id="edit-next-action"><option value="">No next action linked</option></select></label><label>Blocked by / waiting for<input id="edit-blocker"></label><fieldset><legend>Task dependencies</legend><div id="edit-dependencies"></div></fieldset><label>Latest progress<textarea id="edit-progress"></textarea></label><label>Your correction / why<textarea id="edit-reason" required placeholder="Keep your wording so we remember what changed."></textarea></label><p id="edit-error" role="alert"></p><div class="row"><button type="button" id="cancel">Cancel</button><button class="primary" type="submit">Save correction</button></div></form></dialog>
+<dialog id="priority-editor"><form id="priority-form"><h2>Set priority</h2><p id="priority-title"></p><label>Position (leave empty to remove from your priorities)<input id="priority-position" type="number" min="1" step="1"></label><label>Why this matters now<textarea id="priority-reason" required></textarea></label><label>Deadline, only if one is agreed<input id="priority-due" type="date"></label><fieldset><legend>Depends on</legend><div id="priority-dependencies"></div></fieldset><p id="priority-error" role="alert"></p><button type="button" id="priority-refresh" hidden>Refresh order to review</button><div class="row"><button type="button" id="priority-cancel">Cancel</button><button class="primary" type="submit">Save my priority</button></div></form></dialog>
+<script nonce="__TOKEN__">
+const token='__TOKEN__';let state={},priorityState={},selected="board",editing=null,captureAttempt=null,correctionAttempt=null,priorityEditing=null,priorityAttempt=null;
+const $=id=>document.getElementById(id);
+function el(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n}
+let savePrefs={destination:'unset',version:0};
+function renderSavePreferences(){
+ const panel=$('save-preferences'),content=$('save-options');if(!panel||!content)return;
+ if(panel.dataset.preference!==savePrefs.destination){panel.open=savePrefs.destination==='unset';panel.dataset.preference=savePrefs.destination}content.replaceChildren();
+ content.append(el('p',savePrefs.destination==='unset'?'Use Todo as your default place to save work from chats?':savePrefs.destination==='todo'?'Unspecified saves go to Todo.':'Choose a destination when saving.'));
+ content.append(el('p','Explicit files and personal-memory requests keep their destinations. This does not grant background chat access.','muted'));
+ for(const [destination,label] of [['todo','Use Todo'],['ask','Choose each time']]){
+  const b=el('button',label);b.disabled=savePrefs.destination===destination;
+  b.onclick=async()=>{const buttons=[...content.querySelectorAll('button')];buttons.forEach(x=>x.disabled=true);try{savePrefs=await api('/api/save-preferences',{destination,version:savePrefs.version,evidence:'User selected '+label+' in Saving preferences'});renderSavePreferences();$('notice').textContent='Saving preference updated. Available assistants use this choice; it does not change ChatGPT settings automatically.'}catch(e){$('notice').textContent=e.message;buttons.forEach(x=>x.disabled=false)}};content.append(b)
+ }
+}
+async function api(path,data){const r=await fetch(path,data?{method:'POST',headers:{'Content-Type':'application/json','X-Capture-Token':token},body:JSON.stringify(data)}:{});const value=await r.json();if(!r.ok)throw Error(value.error||'Could not save');return value}
+async function load(){[state,priorityState,savePrefs]=await Promise.all([api('/api/state'),api('/api/priorities'),api('/api/save-preferences')]);render();renderSavePreferences()}
+let recordGeneration=0;
+let tablesGeneration=0,tableSearch='',tableProject=null;
+function tableValue(v,type){if(v==null)return '—';if(type==='currency')return '$'+Number(v).toLocaleString();if(type==='currency_range')return '$'+v.min.toLocaleString()+'–$'+v.max.toLocaleString()+(v.plus_local_travel?' + local travel':'');if(typeof v==='object')return JSON.stringify(v);return String(v)}
+async function renderTables(){
+ const gen=++tablesGeneration;$('heading').textContent='Tables';$('objective').textContent='Comparisons, lists and things you’re thinking through. A project is optional.';const content=$('content');content.replaceChildren();
+ const search=el('input');search.placeholder='Find a table';search.value=tableSearch;search.setAttribute('aria-label','Find a table');const find=el('button','Search');const bar=el('form');bar.append(search,find);bar.onsubmit=e=>{e.preventDefault();tableSearch=search.value;renderTables()};content.append(bar);
+ const create=el('details');create.append(el('summary','New table'));const form=el('form'),title=el('input');title.placeholder='Table name';title.required=true;title.setAttribute('aria-label','Table name');const project=el('select');project.setAttribute('aria-label','Table project');const none=el('option','No project');none.value='';project.append(none);for(const p of state.projects){const o=el('option',p.name);o.value=p.id;project.append(o)}const add=el('button','Create table');form.append(title,project,add);create.append(form);content.append(create);
+ form.onsubmit=async e=>{e.preventDefault();add.disabled=true;try{const id=crypto.randomUUID();await api('/api/table-edit',{id,version:0,request_id:crypto.randomUUID(),operations:[{op:'create',title:title.value,project_id:project.value||null,context:'',columns:[{id:'item',label:'Item',type:'text'}]}]});if(gen===tablesGeneration&&selected==='tables')showTable(id)}catch(e){$('notice').textContent=e.message}finally{add.disabled=false}};
+ const results=el('div');content.append(results);
+ async function page(after=''){try{const result=await api('/api/tables',{query:tableSearch,...(tableProject?{project_id:tableProject}:{}),after,limit:30});if(gen!==tablesGeneration||selected!=='tables')return;results.replaceChildren();if(tableProject){const all=el('button','Show all tables');all.onclick=()=>{tableProject=null;renderTables()};results.append(all)}for(const t of result.tables){const card=el('section',undefined,'card'),b=el('button',t.title);b.onclick=()=>showTable(t.id);card.append(b,el('p',t.row_count+' rows · '+(state.projects.find(p=>p.id===t.project_id)?.name||'No project'),'muted'));results.append(card)}if(!result.tables.length)results.append(el('p','No tables here yet. Create one or ask Todo to save a comparison.'));if(result.next){const next=el('button','Next page');next.onclick=()=>page(result.next);results.append(next)}}catch(e){if(gen===tablesGeneration&&selected==='tables')results.textContent=e.message}}
+ await page();
+}
+async function showTable(id,version=null){
+ const gen=++tablesGeneration;const content=$('content');content.replaceChildren(el('p','Loading table…'));
+ try{
+ const record=await api('/api/table',{id,...(version?{version}:{})});if(gen!==tablesGeneration||selected!=='tables')return;
+ $('heading').textContent=record.title;$('objective').textContent='Version '+record.version+(version?' · read-only history':' · edits save to this same table');content.replaceChildren();
+ const back=el('button','All tables');back.onclick=()=>{tableProject=null;renderTables()};content.append(back);
+ const history=el('select');history.setAttribute('aria-label','Table version');const current=el('option','Latest version');current.value='';history.append(current);const latest=version?(await api('/api/table',{id})).version:record.version;if(gen!==tablesGeneration||selected!=='tables')return;for(let v=latest;v>=Math.max(1,latest-99);v--){const o=el('option','Version '+v);o.value=v;history.append(o)}history.value=version||'';history.onchange=()=>showTable(id,history.value?Number(history.value):null);content.append(history);
+ const context=el('details');context.append(el('summary','Context, assumptions & source'));const body=el('p',record.body);body.style.whiteSpace='pre-wrap';context.append(body,el('blockquote',record.quote));content.append(context);
+ if(record.data.table_schema!==1){content.append(el('p','This is an earlier saved comparison. Its original content is preserved above.'));return}
+ const d=record.data;let busy=false;
+ async function change(operations){if(busy)return;busy=true;const controls=[...content.querySelectorAll('input,select,textarea,button')];controls.forEach(c=>c.disabled=true);try{await api('/api/table-edit',{id,version:record.version,request_id:crypto.randomUUID(),operations});if(gen===tablesGeneration&&selected==='tables')await showTable(id)}catch(e){if(gen===tablesGeneration&&selected==='tables'){$('notice').textContent=e.message+' Your edit has not been saved. Reload latest before retrying.';const reload=el('button','Reload latest');reload.onclick=()=>showTable(id);content.append(reload)}}finally{busy=false;controls.forEach(c=>c.disabled=false)}}
+ if(!version){const details=el('details');details.append(el('summary','Table settings'));const form=el('form'),name=el('input');name.value=record.title;name.setAttribute('aria-label','Rename table');const project=el('select');project.setAttribute('aria-label','Move table to project');const none=el('option','No project');none.value='';project.append(none);for(const p of state.projects){const o=el('option',p.name);o.value=p.id;project.append(o)}project.value=d.project_id||'';const note=el('textarea');note.value=record.body;note.setAttribute('aria-label','Table context');const save=el('button','Save table settings');form.append(name,project,note,save);form.onsubmit=e=>{e.preventDefault();change([{op:'metadata',title:name.value,project_id:project.value||null,context:note.value}])};details.append(form);content.append(details)}
+ const filter=el('input');filter.placeholder='Filter rows';filter.setAttribute('aria-label','Filter rows');content.append(filter);const wrap=el('div');wrap.style.overflowX='auto';content.append(wrap);let sort=null,dir=1;const visible=new Set(d.columns.slice(0,7).map(c=>c.id));const chooser=el('details');chooser.append(el('summary','Columns'));for(const col of d.columns){const label=el('label'),check=el('input');check.type='checkbox';check.checked=visible.has(col.id);check.onchange=()=>{check.checked?visible.add(col.id):visible.delete(col.id);draw()};label.append(check,document.createTextNode(' '+col.label));chooser.append(label)}content.insertBefore(chooser,wrap);
+ function draw(){wrap.replaceChildren();const grid=el('table');grid.className='living-table';const head=el('tr');for(const col of d.columns.filter(c=>visible.has(c.id))){const th=el('th'),b=el('button',col.label+(sort===col.id?(dir===1?' ↑':' ↓'):''));b.onclick=()=>{dir=sort===col.id?-dir:1;sort=col.id;draw()};th.append(b);head.append(th)}grid.append(head);
+ let rows=d.rows.filter(r=>Object.values(r.cells).some(v=>tableValue(v,'json').toLowerCase().includes(filter.value.toLowerCase())));if(sort)rows=[...rows].sort((a,b)=>{const x=a.cells[sort],y=b.cells[sort];if(x==null)return y==null?0:1;if(y==null)return -1;return dir*(typeof x==='number'&&typeof y==='number'?x-y:String(x).localeCompare(String(y),undefined,{numeric:true}))});
+ for(const row of rows){const tr=el('tr');tr.dataset.row=row.id;for(const col of d.columns.filter(c=>visible.has(c.id))){const td=el('td'),v=row.cells[col.id];if(version||['json','currency_range'].includes(col.type)){td.textContent=tableValue(v,col.type);if(!version)td.title='Ask Todo to update this structured value'}else{const input=el('input');input.setAttribute('aria-label',col.label+' · '+row.id);input.dataset.column=col.id;if(col.type==='boolean'){input.type='checkbox';input.checked=v===true;input.indeterminate=v==null}else{input.type=['number','currency'].includes(col.type)?'number':'text';if(input.type==='number')input.step='any';input.value=v??'';input.placeholder='—'}input.onchange=()=>change([{op:'row',id:row.id,cells:{[col.id]:col.type==='boolean'?input.checked:input.value===''?null:['number','currency'].includes(col.type)?Number(input.value):input.value}}]);td.append(input)}tr.append(td)}grid.append(tr)}wrap.append(grid);if(!rows.length)wrap.append(el('p','No matching rows.'))}
+ filter.oninput=draw;draw();
+ if(!version){const addRow=el('form'),label=el('input');label.placeholder='New item';label.required=true;label.setAttribute('aria-label','New row');const col=d.columns.find(c=>c.type==='text');if(col){const add=el('button','Add row');addRow.append(label,add);addRow.onsubmit=e=>{e.preventDefault();change([{op:'row',id:crypto.randomUUID(),cells:{[col.id]:label.value}}])};content.append(addRow)}
+ const details=el('details');details.append(el('summary','Add a column'));const form=el('form'),name=el('input');name.placeholder='Column name';name.required=true;name.setAttribute('aria-label','Column name');const type=el('select');type.setAttribute('aria-label','Column type');for(const [value,title] of [['text','Text'],['number','Number'],['currency','Money'],['boolean','Checkbox']]){const o=el('option',title);o.value=value;type.append(o)}const add=el('button','Add column');form.append(name,type,add);form.onsubmit=e=>{e.preventDefault();change([{op:'column',column:{id:crypto.randomUUID(),label:name.value,type:type.value}}])};details.append(form);content.append(details)}
+ }catch(e){if(gen===tablesGeneration&&selected==='tables')content.replaceChildren(el('p',e.message))}
+}
+
+let recordQuery='';
+async function renderRecords(){
+ const generation=++recordGeneration;
+ $('heading').textContent='Saved';$('objective').textContent='Find your tasks, notes, decisions and tables in one place.';
+ const content=$('content');content.replaceChildren();
+ const form=el('form'),query=el('input'),search=el('button','Search');
+ query.placeholder='Search everything saved';query.value=recordQuery;query.setAttribute('aria-label','Search saved work');form.append(query,search);content.append(form);
+ const results=el('div');content.append(results);let searchGeneration=0;
+ async function show(after=''){
+  recordQuery=query.value;const searchVersion=++searchGeneration;
+  results.textContent='Loading…';
+  try{
+   const page=await api('/api/records',{query:query.value,after,limit:30});
+   if(selected!=='records'||generation!==recordGeneration||searchVersion!==searchGeneration)return;
+   results.replaceChildren();
+   const words=query.value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
+   const matches=(state.items||[]).filter(item=>{const p=(state.projects||[]).find(p=>p.id===item.project_id);const text=[item.title,item.detail,item.status,p?.name,p?.objective].join(' ').toLocaleLowerCase();return words.every(w=>text.includes(w))});
+   if(!after&&matches.length){results.append(el('h2','Work items'));for(const item of matches){const card=el('section',undefined,'task-card'),open=el('button',item.title,'task-open');open.onclick=()=>openTask(item.id);card.append(open,el('span',item.status,'tag'));results.append(card)}}
+   if(page.records.length)results.append(el('h2','Notes & tables'));
+   for(const row of page.records){const card=el('section',undefined,'card'),button=el('button',row.title,'task-open');card.append(button,el('p',row.kind+' · '+row.collection,'muted'));results.append(card);
+    button.onclick=async()=>{try{const record=await api('/api/record',{id:row.id});if(selected!=='records'||generation!==recordGeneration||searchVersion!==searchGeneration)return;if(record.kind==='table'&&record.data?.table_schema===1){selected='tables';showTable(record.id);return}const detail=el('section',undefined,'card');detail.append(el('h2',record.title),el('p',record.body));const evidence=el('details');evidence.append(el('summary','Details & source'),el('pre',JSON.stringify(record.data,null,2)),el('p','Version '+record.version+' · '+record.updated,'muted'),el('blockquote',record.quote));detail.append(evidence);
+     if(record.canonical_ref)detail.append(el('p','Edit at the external source: '+record.canonical_ref,'muted'));
+     else{const edit=el('details');edit.setAttribute('data-note-editor','');edit.append(el('summary','Edit note'));const editor=el('form'),title=el('input'),body=el('textarea'),save=el('button','Save changes'),error=el('p');title.value=record.title;title.required=true;title.setAttribute('aria-label','Note title');body.value=record.body;body.setAttribute('aria-label','Note text');error.setAttribute('role','alert');editor.append(title,body,save,error);edit.append(editor);detail.append(edit);let attempt=null;
+      editor.onsubmit=async e=>{e.preventDefault();const changes={title:title.value,body:body.value},sig=JSON.stringify(changes);if(!attempt||attempt.sig!==sig)attempt={sig,id:crypto.randomUUID()};save.disabled=true;try{await api('/api/record-edit',{id:record.id,version:record.version,changes,request_id:attempt.id});$('notice').textContent='Changes saved. Previous versions kept.';await show()}catch(e){error.textContent=e.message+' Your draft is still here. Reopen the latest note before resolving a version conflict.';save.disabled=false}};
+     }
+     const previous=results.querySelector?.('[data-record-detail]');if(previous)previous.remove();detail.setAttribute('data-record-detail','');card.append(detail);
+    }catch(e){$('notice').textContent=e.message}};
+   }
+   if(!page.records.length&&(!matches.length||after))results.append(el('p','No saved work matches. Try a project name or a shorter phrase.'));
+   if(page.next){const next=el('button','More saved results');next.onclick=()=>show(page.next);results.append(next)}
+  }catch(e){if(selected==='records'&&generation===recordGeneration&&searchVersion===searchGeneration)results.textContent=e.message}
+ }
+ form.onsubmit=e=>{e.preventDefault();show()};await show();
+}
+
+function render(){
+ $('projects').replaceChildren();
+ const today=el('button','Today',selected==='board'?'active':'');today.onclick=()=>{selected='board';render()};$('projects').append(today);
+ const picker=el('select');picker.setAttribute('aria-label','Open project');const empty=el('option','Open project…');empty.value='';picker.append(empty);
+ for(const p of state.projects){const option=el('option',p.name);option.value=p.id;picker.append(option)}picker.value=state.projects.some(p=>p.id===selected)?selected:'';picker.onchange=()=>{if(picker.value){selected=picker.value;render()}};$('projects').append(picker);
+ const tables=el('button','Tables',selected==='tables'?'active':'');tables.onclick=()=>{selected='tables';tableProject=null;render()};$('projects').append(tables);
+ const saved=el('button','Saved',selected==='records'?'active':'');saved.onclick=()=>{selected='records';render()};$('projects').append(saved);
+ const more=el('details');more.append(el('summary','More'));for(const [id,title] of [['priorities','Priority details']]){const b=el('button',title);b.onclick=()=>{selected=id;render()};more.append(b)}$('projects').append(more);
+ if(selected==='tables'){renderTables();return}if(selected==='records'){renderRecords();return}if(selected==='priorities'){renderPriorities();return}
+ const project=state.projects.find(p=>p.id===selected);if(project)renderProject(project);else renderToday();
+}
+
+function renderPriorities(){
+ $('heading').textContent='Your priorities';$('objective').textContent='An ordered focus list. Recommendations stay separate until you choose them.';$('content').replaceChildren();
+ const m=priorityState.monitor||{};const scheduleText=priorityState.schedule_status==='active'?'Hourly monitor active.':priorityState.schedule_status==='paused'?'Hourly monitor paused.':priorityState.schedule_status==='unverified'?'Monitor schedule could not be verified.':'Monitor not configured.';const checkText=m.alignment_status==='missing_confirmed_priorities'?' Last check needs your priority order; no drift judgment made.':m.last_check?' Last check: '+m.alignment_status+'.':' No completed check recorded.';const intro=el('p',scheduleText+checkText,'muted');$('content').append(intro);
+ if(priorityState.next_action)$('content').append(el('h2','Next available action'),el('p',priorityState.next_action.title));
+ if(!priorityState.confirmed.length)$('content').append(el('p','No priorities chosen yet. Choose a captured task or goal below; nothing has been ranked for you.'));
+ for(const [key,label] of [['confirmed','Your order'],['recommendations','Assistant recommendations']]){
+  const records=priorityState[key];if(!records.length)continue;$('content').append(el('h2',label));
+  for(const r of records){const card=el('section',undefined,'card');card.append(el('span',r.project.name,'tag'),el('span',r.item.status,'tag'),el('h3',`${r.position}. ${r.item.title}`),el('p',r.reason));
+   if(r.item.kind==='goal')card.append(el('p',r.next_action?'Next action: '+r.next_action.title:'No next action linked','muted'));
+   if(r.item.progress_note)card.append(el('p','Progress: '+r.item.progress_note));
+   if(r.due_date)card.append(el('p',`Deadline: ${r.due_date}`,'muted'));
+   if(r.blockers.length)card.append(el('p',r.blockers.join(' · '),'muted'));
+   if(r.dependencies.length)card.append(el('p','Depends on: '+r.dependencies.map(id=>state.items.find(i=>i.id===id)?.title||id).join(', '),'muted'));
+   const proof=el('details');proof.append(el('summary','Reason and original evidence'),el('p',r.source_label,'muted'),el('blockquote',r.quote),el('p','Project objective: '+r.project.objective));
+   for(const e of r.item_evidence){proof.append(el('p',state.sources.find(s=>s.id===e.source_id)?.label||e.source_id,'muted'),el('blockquote',e.quote))}card.append(proof);
+   const choose=el('button',key==='confirmed'?'Change priority':'Choose / override');choose.onclick=()=>editPriority(r.item,r);card.append(choose);
+   const correct=el('button','Update task');correct.onclick=()=>edit(r.item);card.append(correct);
+   if(key==='confirmed'){for(const [label,delta] of [['Move up',-1],['Move down',1]]){const b=el('button',label);const index=records.indexOf(r);b.disabled=delta<0?index===0:index===records.length-1;b.onclick=()=>movePriority(r,records[index+delta].position);card.append(b)}}
+   $('content').append(card)
+  }
+ }
+ if(priorityState.unranked.length){$('content').append(el('h2','Not yet in your order'));for(const i of priorityState.unranked){const card=el('section',undefined,'card');card.append(el('h3',i.title),el('p',i.detail),el('span',i.status,'tag'));const b=el('button','Set priority');b.onclick=()=>editPriority(i);card.append(b);$('content').append(card)}}
+ const pending=state.sources.filter(s=>!s.processed);if(pending.length)$('content').append(el('p',`${pending.length} saved notes are waiting for automatic organization.`,'muted'));
+}
+function editPriority(item,suggestion){
+ priorityEditing=item;priorityAttempt=null;const current=priorityState.confirmed.find(r=>r.item_id===item.id)||priorityState.inactive.find(r=>r.item_id===item.id&&r.authority==='user');const r=current||suggestion;
+ $('priority-title').textContent=item.title;$('priority-position').value=r?.position||priorityState.confirmed.length+1;$('priority-reason').value=r?.reason||'';$('priority-due').value=r?.due_date||'';$('priority-error').textContent='';$('priority-refresh').hidden=true;$('priority-dependencies').replaceChildren();
+ for(const task of state.items.filter(i=>i.kind==='task'&&i.id!==item.id)){const label=el('label',task.title);const check=el('input');check.type='checkbox';check.value=task.id;check.style.width='auto';check.checked=!!r?.dependencies.includes(task.id);label.prepend(check);$('priority-dependencies').append(label)}
+ $('priority-editor').showModal();
+}
+async function movePriority(r,position){
+ const data={item_id:r.item_id,version:priorityState.version,position,reason:r.reason,due_date:r.due_date,dependencies:r.dependencies,request_id:crypto.randomUUID()};
+ try{await api('/api/prioritize',data);await load();$('notice').textContent='Priority order saved.'}catch(e){$('notice').textContent=e.message;await load()}
+}
+$('priority-refresh').onclick=async()=>{try{await load();priorityAttempt=null;$('priority-refresh').hidden=true;$('priority-error').textContent='Order refreshed: '+priorityState.confirmed.map(r=>r.position+'. '+r.item.title).join('; ')+'. Your draft is preserved. Review the position, then save.'}catch(e){$('priority-error').textContent=e.message;$('priority-refresh').hidden=!e.message.includes('refresh')}};
+$('priority-cancel').onclick=()=>$('priority-editor').close();
+$('priority-form').onsubmit=async e=>{e.preventDefault();const data={item_id:priorityEditing.id,version:priorityState.version,position:$('priority-position').value?Number($('priority-position').value):null,reason:$('priority-reason').value,due_date:$('priority-due').value||null,dependencies:[...$('priority-dependencies').querySelectorAll('input:checked')].map(n=>n.value)};const sig=JSON.stringify(data);if(!priorityAttempt||priorityAttempt.sig!==sig)priorityAttempt={sig,id:crypto.randomUUID()};try{await api('/api/prioritize',{...data,request_id:priorityAttempt.id});$('priority-editor').close();await load();$('notice').textContent='Your priority saved.'}catch(e){$('priority-error').textContent=e.message;$('priority-refresh').hidden=!e.message.includes('refresh')}};
+
+function populateWorkEditor(item){
+ $('edit-next-action').replaceChildren();const empty=el('option','No next action linked');empty.value='';$('edit-next-action').append(empty);
+ $('edit-dependencies').replaceChildren();
+ for(const task of state.items.filter(i=>i.kind==='task'&&i.id!==item.id)){
+  if(task.project_id===item.project_id){const option=el('option',task.title+' · '+task.status);option.value=task.id;$('edit-next-action').append(option)}
+  const label=el('label',task.title);const check=el('input');check.type='checkbox';check.value=task.id;check.style.width='auto';check.checked=!!item.dependencies?.includes(task.id);label.prepend(check);$('edit-dependencies').append(label)
+ }
+ $('edit-next-action').value=item.next_action_id||'';$('edit-next-action').disabled=item.kind!=='goal';$('edit-blocker').value=item.blocker||'';$('edit-progress').value=item.progress_note||'';
+}
+$('edit-project').onchange=()=>{const selected=$('edit-next-action').value;$('edit-next-action').replaceChildren();const empty=el('option','No next action linked');empty.value='';$('edit-next-action').append(empty);for(const task of state.items.filter(i=>i.kind==='task'&&i.id!==editing.id&&i.project_id===$('edit-project').value)){const o=el('option',task.title+' · '+task.status);o.value=task.id;$('edit-next-action').append(o)}$('edit-next-action').value=[...$('edit-next-action').options].some(o=>o.value===selected)?selected:'';};
+$('edit-kind').onchange=()=>{$('edit-next-action').disabled=$('edit-kind').value!=='goal';if($('edit-kind').value!=='goal')$('edit-next-action').value=''};
+function edit(item){editing=item;correctionAttempt=null;$('edit-title').value=item.title;$('edit-detail').value=item.detail;$('edit-kind').value=item.kind;$('edit-status').value=item.status;$('edit-project').replaceChildren();const none=el('option','No project');none.value='';$('edit-project').append(none);for(const p of state.projects){const o=el('option',p.name);o.value=p.id;$('edit-project').append(o)}$('edit-project').value=item.project_id||'';populateWorkEditor(item);$('edit-reason').value='';$('edit-error').textContent='';$('editor').showModal()}
+$('task-close').onclick=()=>$('task-view').close();
+$('cancel').onclick=()=>$('editor').close();
+$('capture-form').onsubmit=async e=>{e.preventDefault();const text=$('capture').value;if(!text.trim())return;if(!captureAttempt||captureAttempt.text!==text)captureAttempt={id:'note:'+crypto.randomUUID(),text};try{await api('/api/capture',captureAttempt);$('capture').value='';captureAttempt=null;$('notice').textContent='Saved on this Mac. Queued for automatic organization.';await load()}catch(e){$('notice').textContent=e.message}};
+$('edit-form').onsubmit=async e=>{e.preventDefault();const data={item_id:editing.id,version:editing.version,changes:{title:$('edit-title').value,detail:$('edit-detail').value,kind:$('edit-kind').value,status:$('edit-status').value,project_id:$('edit-project').value||null,next_action_id:$('edit-next-action').value||null,blocker:$('edit-blocker').value,progress_note:$('edit-progress').value,dependencies:[...$('edit-dependencies').querySelectorAll('input:checked')].map(n=>n.value)},reason:$('edit-reason').value};const sig=JSON.stringify(data);if(!correctionAttempt||correctionAttempt.sig!==sig)correctionAttempt={sig,id:crypto.randomUUID()};try{await api('/api/correct',{...data,request_id:correctionAttempt.id});$('editor').close();$('notice').textContent='Correction saved. Original wording and previous versions kept.';await load()}catch(e){$('edit-error').textContent=e.message}};
+let boardBusy=false;
+function focusRows(){return priorityState.effective_focus||[...(priorityState.confirmed||[]),...(priorityState.recommendations||[])]}
+function projectBoard(projectId){
+ const saved=(state.boards||[]).find(b=>b.project_id===projectId);
+ return saved?JSON.parse(JSON.stringify(saved)):{project_id:projectId,version:0,data:{stages:[{id:'tasks',title:'Tasks',item_ids:[]}],current_stage:null,milestone:''},manual_layout:0};
+}
+async function persistBoard(board){
+ if(boardBusy)return;boardBusy=true;
+ try{await api('/api/board',{project_id:board.project_id,version:board.version,data:board.data,request_id:crypto.randomUUID()});await load();$('notice').textContent='Board saved.'}
+ catch(e){$('notice').textContent=e.message;await load()}finally{boardBusy=false}
+}
+async function moveStage(item,stageId,beforeId){
+ const board=projectBoard(item.project_id);
+ for(const stage of board.data.stages)stage.item_ids=stage.item_ids.filter(id=>id!==item.id&&state.items.some(i=>i.id===id&&i.project_id===item.project_id&&i.kind==='task'));
+ const target=board.data.stages.find(s=>s.id===stageId);if(!target){if(stageId===null)await persistBoard(board);return;}
+ const index=target.item_ids.indexOf(beforeId);target.item_ids.splice(index<0?target.item_ids.length:index,0,item.id);await persistBoard(board);
+}
+async function changeTask(item,changes,reason){
+ try{await api('/api/correct',{item_id:item.id,version:item.version,changes,reason,request_id:crypto.randomUUID()});await load();$('notice').textContent='Saved.';return true}
+ catch(e){$('notice').textContent=e.message;await load();return false}
+}
+function taskCard(item,projectView=false){
+ const card=el('div',undefined,'task-card');card.dataset.item=item.id;card.draggable=true;
+ card.ondragstart=e=>e.dataTransfer.setData('text/plain',item.id);
+ const check=el('input');check.type='checkbox';check.checked=item.status==='done';check.setAttribute('aria-label',(check.checked?'Reopen ':'Complete ')+item.title);check.onchange=()=>{check.disabled=true;changeTask(item,{status:check.checked?'done':'open'},check.checked?'I completed this task.':'I reopened this task.')};
+ const body=el('div',undefined,'task-body'),open=el('button',item.title,'task-open');open.onclick=()=>openTask(item.id);body.append(open);
+ const p=state.projects.find(p=>p.id===item.project_id);if(!projectView&&p){const link=el('button',p.name,'project-label');link.onclick=()=>{selected=p.id;render()};body.append(link)}
+ const row=taskFocus(item);
+ const bits=[];if(item.status==='done')bits.push(item.completion_kind==='verified'?'Done · verified':'Done · reported');else if(item.status!=='open')bits.push(item.status);
+ if(item.blocker)bits.push(item.blocker);if(row?.due_date)bits.push('Due '+row.due_date);if(projectView&&row)bits.push('On Today');
+ if(item.steps?.length)bits.push(item.steps.filter(s=>s.done).length+'/'+item.steps.length+' steps');
+ if(bits.length)body.append(el('div',bits.join(' · '),'task-meta'));
+ card.append(check,body);if(item.status==='done')card.classList.add('completed');return card;
+}
+function taskFocus(item){return focusRows().find(r=>r.item_id===item.id)||focusRows().find(r=>state.items.find(i=>i.id===r.item_id)?.next_action_id===item.id)}
+function todayItems(){
+ const byId=new Map(state.items.map(i=>[i.id,i]));const picked=[];
+ for(const r of focusRows()){
+  const item=byId.get(r.item_id);const task=item?.kind==='goal'?byId.get(item.next_action_id):item;
+  const dismissed=(priorityState.inactive||[]).some(r=>r.item_id===task?.id&&r.authority==='user'&&r.position===null);
+  if(!dismissed&&task?.kind==='task'&&task.status==='open'&&!task.blocker&&!picked.some(x=>x.id===task.id)&&!(r.blockers||[]).length&&!(task.dependencies||[]).some(id=>byId.get(id)?.status!=='done'))picked.push(task);
+ }
+ return picked;
+}
+function renderToday(){
+ $('heading').textContent='Today';$('objective').textContent='Your next few moves.';$('content').replaceChildren();
+ const picked=todayItems();const list=el('div',undefined,'today-list');
+ if(!picked.length)list.append(el('p','Choose a task below to bring it into Today. Conversation priorities appear here as they are captured.','muted'));
+ for(const item of picked){const card=taskCard(item);const r=taskFocus(item);if(r?.authority==='assistant')card.querySelector('.task-body').append(el('div','Suggested','task-meta'));
+ card.ondragover=e=>e.preventDefault();card.ondrop=async e=>{e.preventDefault();const id=e.dataTransfer.getData('text/plain');const moving=state.items.find(i=>i.id===id);if(!moving||moving.id===item.id)return;const target=priorityState.confirmed.find(r=>r.item_id===item.id);const old=priorityState.confirmed.find(r=>r.item_id===id);try{await api('/api/prioritize',{item_id:id,version:priorityState.version,position:target?target.position-(old&&old.position<target.position?1:0):priorityState.confirmed.length+1,reason:'I reordered Today.',request_id:crypto.randomUUID(),due_date:old?.due_date||null,dependencies:old?.dependencies||[]});await load()}catch(e){$('notice').textContent=e.message;await load()}};list.append(card)}
+ $('content').append(list);
+ const rest=state.items.filter(i=>i.kind==='task'&&!['done','canceled'].includes(i.status)&&!picked.some(x=>x.id===i.id));const details=el('details',undefined,'supporting');details.append(el('summary','Other tasks · '+rest.length));for(const item of rest)details.append(taskCard(item));$('content').append(details);
+ const canceled=state.items.filter(i=>i.kind==='task'&&i.status==='canceled');if(canceled.length){const d=el('details',undefined,'supporting');d.append(el('summary','Canceled · '+canceled.length));for(const item of canceled)d.append(taskCard(item));$('content').append(d)}
+ const done=state.items.filter(i=>i.kind==='task'&&i.status==='done');if(done.length){const d=el('details',undefined,'supporting');d.append(el('summary','Completed · '+done.length));for(const item of done)d.append(taskCard(item));$('content').append(d)}
+}
+function renderProject(project){
+ $('heading').textContent=project.name;$('objective').textContent=project.objective;$('content').replaceChildren();
+ const board=projectBoard(project.id),tasks=state.items.filter(i=>i.project_id===project.id&&i.kind==='task'),current=board.data.stages.find(s=>s.id===board.data.current_stage);
+ if(current||board.data.milestone){const status=el('div',undefined,'project-status');if(current)status.append(el('div',current.title+' · '+(board.data.current_stage_confirmed?'Current stage':'Proposed current stage')));if(board.data.milestone)status.append(el('div','Next milestone: '+board.data.milestone,'muted'));$('content').append(status)}
+ const columns=el('div',undefined,'stage-board');const placed=new Set(board.data.stages.flatMap(s=>s.item_ids));const unplaced=tasks.filter(i=>!placed.has(i.id));
+ const stages=[...board.data.stages];if(unplaced.length&&board.version)stages.push({id:null,title:'To place',item_ids:unplaced.map(i=>i.id)});else if(!board.version)stages[0].item_ids=tasks.map(i=>i.id);
+ for(const [index,stage] of stages.entries()){
+ const column=el('section',undefined,'stage-column');if(stage.id===current?.id)column.classList.add('current');column.setAttribute('aria-label',stage.title);
+ const head=el('div',undefined,'stage-heading');head.append(el('div',String(index+1).padStart(2,'0')+(stage.id===current?.id?' · CURRENT':''),'task-meta'),el('h2',stage.title));column.append(head);
+ if(stage.id){column.ondragover=e=>{e.preventDefault();column.classList.add('over')};column.ondragleave=()=>column.classList.remove('over');column.ondrop=e=>{e.preventDefault();column.classList.remove('over');const item=tasks.find(i=>i.id===e.dataTransfer.getData('text/plain'));if(item)moveStage(item,stage.id)}}
+ const group=stage.item_ids.map(id=>tasks.find(i=>i.id===id)).filter(Boolean);const later=el('details');later.append(el('summary','Later · '+group.filter(i=>i.status==='parked').length));const completed=el('details');completed.append(el('summary','Completed · '+group.filter(i=>i.status==='done').length));
+ for(const item of group){const card=taskCard(item,true);if(stage.id){card.ondragover=e=>e.preventDefault();card.ondrop=e=>{e.preventDefault();e.stopPropagation();const moving=tasks.find(i=>i.id===e.dataTransfer.getData('text/plain'));if(moving&&moving.id!==item.id)moveStage(moving,stage.id,item.id)}}if(item.status==='done')completed.append(card);else if(item.status==='parked')later.append(card);else if(item.status!=='canceled')column.append(card)}
+ if(group.some(i=>i.status==='canceled')){const canceled=el('details');canceled.append(el('summary','Canceled · '+group.filter(i=>i.status==='canceled').length));for(const item of group.filter(i=>i.status==='canceled'))canceled.append(taskCard(item));column.append(canceled)}if(group.some(i=>i.status==='parked'))column.append(later);if(group.some(i=>i.status==='done'))column.append(completed);if(!group.length)column.append(el('p','No tasks here','task-meta'));columns.append(column)}
+ $('content').append(columns);
+ const supporting=el('details',undefined,'supporting');supporting.append(el('summary','Goals, notes & project context'));
+ for(const item of state.items.filter(i=>i.project_id===project.id&&i.kind!=='task')){const b=el('button',item.title,'context-link');b.onclick=()=>openTask(item.id);supporting.append(b)}
+ const tableLink=el('button','Project tables','context-link');tableLink.onclick=()=>{tableProject=project.id;tableSearch='';selected='tables';render()};supporting.append(tableLink);
+ const records=el('button','Open saved notes & tables','context-link');records.onclick=()=>{selected='records';render()};supporting.append(records);$('content').append(supporting);
+ const settings=el('details',undefined,'supporting');settings.append(el('summary','Edit stages'));
+ const form=el('form'),stageRows=el('div');const draft=JSON.parse(JSON.stringify(board.data.stages));
+ function stageFields(){stageRows.replaceChildren();for(const stage of draft){const row=el('div',undefined,'row'),name=el('input');name.value=stage.title;name.setAttribute('aria-label','Stage name');name.oninput=()=>stage.title=name.value;const remove=el('button','Remove');remove.type='button';remove.onclick=()=>{draft.splice(draft.indexOf(stage),1);stageFields()};row.append(name,remove);stageRows.append(row)}}stageFields();
+ const add=el('button','Add stage');add.type='button';add.onclick=()=>{draft.push({id:crypto.randomUUID(),title:'New stage',item_ids:[]});stageFields()};
+ const currentLabel=el('label','Current stage'),select=el('select');select.append(el('option','Not established'));select.firstChild.value='';for(const s of board.data.stages){const o=el('option',s.title);o.value=s.id;select.append(o)}select.value=board.data.current_stage||'';let currentChanged=false;select.onchange=()=>currentChanged=true;currentLabel.append(select);
+ const milestoneLabel=el('label','Next milestone'),milestone=el('input');milestone.value=board.data.milestone;milestoneLabel.append(milestone);const save=el('button','Save stages');form.append(stageRows,add,currentLabel,milestoneLabel,save);form.onsubmit=e=>{e.preventDefault();if(!draft.length||draft.some(s=>!s.title.trim())){$('notice').textContent='Keep at least one named stage.';return}const updated=projectBoard(project.id);updated.data.stages=draft;updated.data.current_stage=draft.some(s=>s.id===select.value)?select.value:null;if(currentChanged)updated.data.current_stage_confirmed=!!updated.data.current_stage;updated.data.milestone=milestone.value;persistBoard(updated)};settings.append(form);$('content').append(settings);
+}
+function openTask(id){
+ const item=state.items.find(i=>i.id===id);if(!item)return;const content=$('task-detail');content.replaceChildren();content.append(el('h2',item.title));
+ if(item.progress_note)content.append(el('p',item.progress_note));if(item.blocker)content.append(el('p','Waiting on: '+item.blocker,'muted'));if(item.detail)content.append(el('p',item.detail,'task-description'));
+ if(item.steps?.length){content.append(el('h3','Steps'));for(const step of item.steps){const label=el('label',undefined,'step-row'),check=el('input');check.type='checkbox';check.checked=step.done;check.onchange=async()=>{check.disabled=true;const steps=item.steps.map(s=>s.id===step.id?{...s,done:check.checked}:s);await changeTask(item,{steps},check.checked?'I completed this step: '+step.title:'I reopened this step: '+step.title);openTask(id)};label.append(check,el('span',step.title));content.append(label)}}
+ if(item.kind==='task'&&item.project_id){const board=projectBoard(item.project_id),label=el('label','Stage'),select=el('select');select.setAttribute('aria-label','Stage');const blank=el('option','To place');blank.value='';select.append(blank);for(const stage of board.data.stages){const o=el('option',stage.title);o.value=stage.id;select.append(o)}select.value=board.data.stages.find(s=>s.item_ids.includes(id))?.id||'';select.onchange=async()=>{await moveStage(item,select.value||null);openTask(id)};label.append(select);content.append(label)}
+ const actions=el('div',undefined,'row');const editButton=el('button','Edit');editButton.onclick=()=>{$('task-view').close();edit(item)};actions.append(editButton);
+ if(item.kind==='task'&&!['done','canceled'].includes(item.status)){const priority=el('button','Set priority');priority.onclick=()=>{$('task-view').close();editPriority(item)};actions.append(priority)}content.append(actions);
+ const proof=el('details');proof.append(el('summary','Sources & changes'));for(const evidence of state.evidence.filter(e=>e.item_id===id)){proof.append(el('p',state.sources.find(s=>s.id===evidence.source_id)?.label||evidence.source_id,'muted'),el('blockquote',evidence.quote))}for(const event of state.events.filter(e=>e.item_id===id)){const entry=el('details');entry.append(el('summary','Change · '+event.created),el('pre',event.current));proof.append(entry)}content.append(proof);
+ if(!$('task-view').open)$('task-view').showModal();
+}
+
+$('refresh-workspace').onclick=()=>load().catch(e=>$('notice').textContent=e.message);
+window.addEventListener('focus',()=>{if(state.items&&!document.querySelector('[data-note-editor][open]')&&!$('editor').open&&!$('priority-editor').open&&!$('task-view').open)load().catch(e=>$('notice').textContent=e.message)});
+load().catch(e=>$('notice').textContent=e.message);
+</script></html>

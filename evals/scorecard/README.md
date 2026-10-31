@@ -1,5 +1,31 @@
 # Todo evaluation scorecard
 
+## October 31 subscription run
+
+[Frozen conversation requirements](requirements.md) define strict state, evidence,
+identity, priority and readback gates. [run_subscription.py](run_subscription.py)
+uses the signed-in Codex CLI and actual stdio MCP server against a temporary,
+source-identical runtime and database. Product code and prompts stay unchanged.
+The eight original cases run three times each; genuine failures are retained.
+Additional [failure-specific acceptance cases](failure-acceptance-cases.json) define
+the broader release gate and are not silently counted as covered by those eight.
+
+```sh
+python3 evals/scorecard/run_subscription.py --trials 3 \
+  --output evals/scorecard/subscription-results-2026-10-31.json \
+  --raw data/evals/subscription-2026-10-31/accepted
+```
+
+This command consumes subscription quota, requires an existing ChatGPT login,
+removes API-key/base-URL environment overrides and forces ChatGPT authentication.
+There is no paid API fallback. Its test-only CLI invocation approves only named
+write tools against the temporary fixture; it changes no installed plugin or global
+permissions. An earlier diagnostic without that test grant was blocked and is
+retained separately. The live run is actual model/tool behavior in Codex, not a
+simulation of native ChatGPT permissions, UI, background capture or cloud hosting.
+Read [the subscription report](subscription-REPORT-2026-10-31.md) for outcomes; the older offline report below
+remains evidence of its own October 28 run, not the current model-test status.
+
 An offline evaluation of the **existing** persistent-workspace/MCP implementation,
 not a replacement app or an optimization. The main project owns tasks, fixtures,
 graders and reports here. No production records or model/provider calls are needed.
@@ -88,10 +114,12 @@ understand user intent. A malicious/wrong model can submit a semantically unsupp
 status with a valid quote. Consequently software green does not establish automatic
 capture or final-answer accuracy. No adversarial model robustness claim follows.
 
-## Model lane: explicitly not reached
+## October 28 offline model lane: not reached in that run
 
-No new model runs are authorized or performed in this evaluation. The eight fixed
-model tasks remain **not-reached**, including the six held-out cases. Publishing
+The October 28 offline run did not authorize or perform model inference. Its eight
+model tasks were **not-reached**, including the six reserved cases. October 31
+subscription outcomes are recorded separately above; the original offline receipt
+is not rewritten to imply it ran a model. Publishing
 them is disclosure; they cannot later be claimed as secret/uncontaminated tests.
 Reserve new unseen cases before any future tuning. Never tune on held-out outputs.
 

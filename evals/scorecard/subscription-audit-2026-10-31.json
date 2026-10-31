@@ -1,0 +1,300 @@
+{
+  "requirements_version": "2026-10-31",
+  "source_report_sha256": "bff1c5c0d6966d83997860b2d02486770bc4493b340328cafbccfdc650099c54",
+  "model_calls": 0,
+  "rows": [
+    {
+      "id": "M01",
+      "trial": 1,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write1_original_clause": true,
+        "turn1_write1_read_before": true,
+        "turn1_write1_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M02",
+      "trial": 1,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M03",
+      "trial": 1,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write1_original_clause": true,
+        "turn1_write1_read_before": true,
+        "turn1_write1_read_after": true,
+        "turn2_write1_original_clause": true,
+        "turn2_write1_read_before": true,
+        "turn2_write1_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M04",
+      "trial": 1,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write1_original_clause": true,
+        "turn1_write1_read_before": true,
+        "turn1_write1_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M05",
+      "trial": 1,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M06",
+      "trial": 1,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M07",
+      "trial": 1,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write2_original_clause": true,
+        "turn1_write2_read_before": true,
+        "turn1_write2_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M08",
+      "trial": 1,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "reply_mentions_actual_indoor_room": true,
+        "status_citation_belongs_to_this_task": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M01",
+      "trial": 2,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write1_original_clause": true,
+        "turn1_write1_read_before": true,
+        "turn1_write1_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M02",
+      "trial": 2,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M03",
+      "trial": 2,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write1_original_clause": true,
+        "turn1_write1_read_before": true,
+        "turn1_write1_read_after": true,
+        "turn2_write1_original_clause": true,
+        "turn2_write1_read_before": true,
+        "turn2_write1_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M04",
+      "trial": 2,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write1_original_clause": true,
+        "turn1_write1_read_before": true,
+        "turn1_write1_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M05",
+      "trial": 2,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M06",
+      "trial": 2,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M07",
+      "trial": 2,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write3_original_clause": true,
+        "turn1_write3_read_before": true,
+        "turn1_write3_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M08",
+      "trial": 2,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "reply_mentions_actual_indoor_room": true,
+        "status_citation_belongs_to_this_task": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M01",
+      "trial": 3,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write1_original_clause": true,
+        "turn1_write1_read_before": true,
+        "turn1_write1_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M02",
+      "trial": 3,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M03",
+      "trial": 3,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write1_original_clause": true,
+        "turn1_write1_read_before": true,
+        "turn1_write1_read_after": true,
+        "turn2_write1_original_clause": true,
+        "turn2_write1_read_before": true,
+        "turn2_write1_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M04",
+      "trial": 3,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write1_original_clause": true,
+        "turn1_write1_read_before": true,
+        "turn1_write1_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M05",
+      "trial": 3,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M06",
+      "trial": 3,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M07",
+      "trial": 3,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "turn1_write2_original_clause": true,
+        "turn1_write2_read_before": true,
+        "turn1_write2_read_after": true
+      },
+      "passed": true
+    },
+    {
+      "id": "M08",
+      "trial": 3,
+      "checks": {
+        "exact_expected_revision": true,
+        "frozen_requirements_binding": true,
+        "no_unrequested_artifact_writes": true,
+        "reply_mentions_actual_indoor_room": true,
+        "status_citation_belongs_to_this_task": true
+      },
+      "passed": true
+    }
+  ],
+  "passed": 24,
+  "total": 24
+}

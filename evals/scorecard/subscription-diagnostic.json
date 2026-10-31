@@ -1,0 +1,1299 @@
+{
+  "schema_version": 1,
+  "boundary": "Real subscription Codex model and actual stdio MCP; temporary source-identical runtime/SQLite. Not native ChatGPT.",
+  "auth": "codex login status: ChatGPT; forced_login_method=chatgpt; API key/base URL environment overrides removed",
+  "cli_version": "codex-cli 0.165.0-alpha.1.2",
+  "bindings": {
+    "commit": "d6ac29861c3fe30fefd4b694eb5656593cf3ebda",
+    "files": {
+      "app.py": "77c866d8875832d38d822495036d1509521ba1f7a7e42151dc54ba85e0b7ebb6",
+      "work.py": "9199c355b598a1508999f1b1ba6bf04260fffcbc2a0f8eb80f1c7dbc795f266e",
+      "priorities.py": "cd659624bf03e22f49cfc143a4da3156f5a1a70582aaf42e520051fa9510cb33",
+      "records.py": "468bb5a1870bd7762cf00f4c78520457ecf67bf96252c4649e7ea2b96ae82965",
+      "tables.py": "b7d8f8ef86173ada55e1931fc15c8289790f5c37df48887bd353d270a024ad0d",
+      "boards.py": "c2176c566a76e246e2750fb52b7a95ce93070e74b70cb869be9d6d206dced5bd",
+      "reconciliation.py": "96bcfd1192893785ec3f411ceed96e484fff717fe3eba974bf2bac2802fd50c2",
+      "save_preferences.py": "91cbf70edc1e09eae514a670b83a4f23e34b21920c7ceeadcab692922874419a",
+      "plugin/server.py": "5fa255e965359c73f2576328f4f20b14b8b716f08e0a9a589afa61384d3d9947",
+      "plugin/skills/personal-todo/SKILL.md": "c02793d6d9809efbb999c0c156436ac097c540a7ce8cb12312f2c7ed4c3ef017",
+      "plugin/skills/personal-todo/capture-policy.md": "2728b3142340457fdecbf00ec2c293ef3578b0f5d24b73a291a9169f237f5761",
+      "evals/scorecard/run.py": "7375bc8fd5119c471cabe513849dc2c2ea3bb56db5029ea4c6cd59af903333ba",
+      "evals/scorecard/cases.json": "9672de9631781fcb07c4d6e418e594b3bcb27eaa0162100bfdfb2ef242fbc5ee"
+    },
+    "python": "3.9.6",
+    "platform": "Darwin",
+    "model": null,
+    "runtime_version": "0.7.10",
+    "tool_schema_sha256": "85599acc744dcefb8a4be0a883ffb8272321a5496a61e47fc1e64617b6835fa3",
+    "config": {
+      "trials": "set per report",
+      "distractor_repetitions": 1500,
+      "cloud_network": false,
+      "model_calls": false
+    }
+  },
+  "requirements_sha256": "80e78dc3989dd9303b78b58b7bed5a1bbae96c3d3f7c6c5902538cea77cb2643",
+  "harness_sha256": "2510e2b99c0bfd7796200bb52de74cc93c7b1b0cbb9873605bbb958be827148c",
+  "trials": 1,
+  "cases": [
+    {
+      "id": "M01",
+      "trial": 1,
+      "status": "fail",
+      "valid_run": true,
+      "turns": [
+        {
+          "turn": 1,
+          "user_text": "For Cedar, I finished the invitation.",
+          "prompt_sha256": "695993664fe720968c17994428fe2ace0111f4fe42a07abb7248f2c61e899673",
+          "wall_seconds": 11.806,
+          "calls": [
+            {
+              "id": "item_1",
+              "type": "mcp_tool_call",
+              "server": "todo",
+              "tool": "read_workspace",
+              "arguments": {
+                "query": "Cedar"
+              },
+              "result": {
+                "content": [
+                  {
+                    "type": "text",
+                    "text": "{\"state\": {\"projects\": [{\"id\": \"cedar\", \"name\": \"Cedar\", \"objective\": \"Prepare Cedar\", \"source_id\": \"source-invite\", \"quote\": \"For Cedar\", \"version\": 1}], \"items\": [{\"id\": \"invite\", \"project_id\": \"cedar\", \"kind\": \"task\", \"title\": \"Review invitation\", \"detail\": \"Use the indoor room, not the garden.\", \"status\": \"open\", \"version\": 2, \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"next_action_id\": null, \"blocker\": \"\", \"dependencies\": [], \"progress_note\": \"\", \"completion_kind\": \"none\", \"verification_ref\": null, \"steps\": []}, {\"id\": \"venue\", \"project_id\": \"cedar\", \"kind\": \"task\", \"title\": \"Verify venue\", \"detail\": \"Venue inspection\", \"status\": \"done\", \"version\": 2, \"created\": \"2026-10-31T07:45:47.295357+00:00\", \"next_action_id\": null, \"blocker\": \"\", \"dependencies\": [], \"progress_note\": \"\", \"completion_kind\": \"user_reported\", \"verification_ref\": null, \"steps\": []}], \"sources\": [{\"id\": \"source-invite\", \"label\": \"User task capture\", \"text\": \"For Cedar I will review the invitation.\", \"created\": \"2026-10-31T07:45:47.291655+00:00\", \"processed\": 1, \"source_type\": \"user\", \"reference\": null}, {\"id\": \"source-venue\", \"label\": \"User task capture\", \"text\": \"For Cedar I will verify the venue.\", \"created\": \"2026-10-31T07:45:47.295067+00:00\", \"processed\": 1, \"source_type\": \"user\", \"reference\": null}, {\"id\": \"corrected-source\", \"label\": \"User task update\", \"text\": \"Correction for Cedar: use the indoor room, not the garden.\", \"created\": \"2026-10-31T07:45:47.299465+00:00\", \"processed\": 1, \"source_type\": \"user\", \"reference\": null}, {\"id\": \"venue-done-source\", \"label\": \"User task update\", \"text\": \"The Cedar venue check is done.\", \"created\": \"2026-10-31T07:45:47.301106+00:00\", \"processed\": 1, \"source_type\": \"user\", \"reference\": null}, {\"id\": \"priority:manual-rank\", \"label\": \"Direct priority choice in local workspace\", \"text\": \"My manual first choice\", \"created\": \"2026-10-31T07:45:47.302395+00:00\", \"processed\": 1, \"source_type\": \"user\", \"reference\": null}], \"evidence\": [{\"item_id\": \"invite\", \"source_id\": \"source-invite\", \"quote\": \"For Cedar I will review the invitation.\"}, {\"item_id\": \"venue\", \"source_id\": \"source-venue\", \"quote\": \"For Cedar I will verify the venue.\"}, {\"item_id\": \"invite\", \"source_id\": \"corrected-source\", \"quote\": \"Correction for Cedar: use the indoor room, not the garden.\"}, {\"item_id\": \"venue\", \"source_id\": \"venue-done-source\", \"quote\": \"The Cedar venue check is done.\"}], \"events\": [{\"id\": 1, \"item_id\": \"invite\", \"source_id\": \"source-invite\", \"previous\": null, \"current\": \"{\\\"created\\\": \\\"2026-10-31T07:45:47.292376+00:00\\\", \\\"detail\\\": \\\"Use the garden.\\\", \\\"id\\\": \\\"invite\\\", \\\"kind\\\": \\\"task\\\", \\\"project_id\\\": \\\"cedar\\\", \\\"status\\\": \\\"open\\\", \\\"title\\\": \\\"Review invitation\\\", \\\"version\\\": 1}\", \"created\": \"2026-10-31T07:45:47.292459+00:00\"}, {\"id\": 2, \"item_id\": \"venue\", \"source_id\": \"source-venue\", \"previous\": null, \"current\": \"{\\\"created\\\": \\\"2026-10-31T07:45:47.295357+00:00\\\", \\\"detail\\\": \\\"Venue inspection\\\", \\\"id\\\": \\\"venue\\\", \\\"kind\\\": \\\"task\\\", \\\"project_id\\\": \\\"cedar\\\", \\\"status\\\": \\\"open\\\", \\\"title\\\": \\\"Verify venue\\\", \\\"version\\\": 1}\", \"created\": \"2026-10-31T07:45:47.295676+00:00\"}, {\"id\": 4, \"item_id\": \"invite\", \"source_id\": \"corrected-source\", \"previous\": \"{\\\"blocker\\\": \\\"\\\", \\\"completion_kind\\\": \\\"none\\\", \\\"created\\\": \\\"2026-10-31T07:45:47.292376+00:00\\\", \\\"dependencies\\\": [], \\\"detail\\\": \\\"Use the garden.\\\", \\\"id\\\": \\\"invite\\\", \\\"kind\\\": \\\"task\\\", \\\"next_action_id\\\": null, \\\"progress_note\\\": \\\"\\\", \\\"project_id\\\": \\\"cedar\\\", \\\"status\\\": \\\"open\\\", \\\"steps\\\": [], \\\"title\\\": \\\"Review invitation\\\", \\\"verification_ref\\\": null, \\\"version\\\": 1}\", \"current\": \"{\\\"blocker\\\": \\\"\\\", \\\"completion_kind\\\": \\\"none\\\", \\\"created\\\": \\\"2026-10-31T07:45:47.292376+00:00\\\", \\\"dependencies\\\": [], \\\"detail\\\": \\\"Use the indoor room, not the garden.\\\", \\\"id\\\": \\\"invite\\\", \\\"kind\\\": \\\"task\\\", \\\"next_action_id\\\": null, \\\"progress_note\\\": \\\"\\\", \\\"project_id\\\": \\\"cedar\\\", \\\"status\\\": \\\"open\\\", \\\"steps\\\": [], \\\"title\\\": \\\"Review invitation\\\", \\\"verification_ref\\\": null, \\\"version\\\": 2}\", \"created\": \"2026-10-31T07:45:47.299802+00:00\"}, {\"id\": 5, \"item_id\": \"venue\", \"source_id\": \"venue-done-source\", \"previous\": \"{\\\"blocker\\\": \\\"\\\", \\\"completion_kind\\\": \\\"none\\\", \\\"created\\\": \\\"2026-10-31T07:45:47.295357+00:00\\\", \\\"dependencies\\\": [], \\\"detail\\\": \\\"Venue inspection\\\", \\\"id\\\": \\\"venue\\\", \\\"kind\\\": \\\"task\\\", \\\"next_action_id\\\": null, \\\"progress_note\\\": \\\"\\\", \\\"project_id\\\": \\\"cedar\\\", \\\"status\\\": \\\"open\\\", \\\"steps\\\": [], \\\"title\\\": \\\"Verify venue\\\", \\\"verification_ref\\\": null, \\\"version\\\": 1}\", \"current\": \"{\\\"blocker\\\": \\\"\\\", \\\"completion_kind\\\": \\\"user_reported\\\", \\\"created\\\": \\\"2026-10-31T07:45:47.295357+00:00\\\", \\\"dependencies\\\": [], \\\"detail\\\": \\\"Venue inspection\\\", \\\"id\\\": \\\"venue\\\", \\\"kind\\\": \\\"task\\\", \\\"next_action_id\\\": null, \\\"progress_note\\\": \\\"\\\", \\\"project_id\\\": \\\"cedar\\\", \\\"status\\\": \\\"done\\\", \\\"steps\\\": [], \\\"title\\\": \\\"Verify venue\\\", \\\"verification_ref\\\": null, \\\"version\\\": 2}\", \"created\": \"2026-10-31T07:45:47.301450+00:00\"}], \"project_events\": [], \"boards\": []}, \"priorities\": {\"version\": 1, \"confirmed\": [{\"item_id\": \"invite\", \"authority\": \"user\", \"position\": 1, \"reason\": \"My manual first choice\", \"due_date\": null, \"dependencies\": [], \"source_id\": \"priority:manual-rank\", \"quote\": \"My manual first choice\", \"updated\": \"2026-10-31T07:45:47.302524+00:00\", \"effective_dependencies\": [], \"item\": {\"id\": \"invite\", \"project_id\": \"cedar\", \"kind\": \"task\", \"title\": \"Review invitation\", \"detail\": \"Use the indoor room, not the garden.\", \"status\": \"open\", \"version\": 2, \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"next_action_id\": null, \"blocker\": \"\", \"dependencies\": [], \"progress_note\": \"\", \"completion_kind\": \"none\", \"verification_ref\": null, \"steps\": []}, \"project\": {\"id\": \"cedar\", \"name\": \"Cedar\", \"objective\": \"Prepare Cedar\", \"source_id\": \"source-invite\", \"quote\": \"For Cedar\", \"version\": 1}, \"source_label\": \"Direct priority choice in local workspace\", \"item_evidence\": [{\"item_id\": \"invite\", \"source_id\": \"source-invite\", \"quote\": \"For Cedar I will review the invitation.\"}, {\"item_id\": \"invite\", \"source_id\": \"corrected-source\", \"quote\": \"Correction for Cedar: use the indoor room, not the garden.\"}], \"next_action\": {\"id\": \"invite\", \"project_id\": \"cedar\", \"kind\": \"task\", \"title\": \"Review invitation\", \"detail\": \"Use the indoor room, not the garden.\", \"status\": \"open\", \"version\": 2, \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"next_action_id\": null, \"blocker\": \"\", \"dependencies\": [], \"progress_note\": \"\", \"completion_kind\": \"none\", \"verification_ref\": null, \"steps\": []}, \"actionable\": true, \"blockers\": [], \"unfinished_dependencies\": []}], \"recommendations\": [], \"effective_focus\": [{\"item_id\": \"invite\", \"authority\": \"user\", \"position\": 1, \"reason\": \"My manual first choice\", \"due_date\": null, \"dependencies\": [], \"source_id\": \"priority:manual-rank\", \"quote\": \"My manual first choice\", \"updated\": \"2026-10-31T07:45:47.302524+00:00\", \"effective_dependencies\": [], \"item\": {\"id\": \"invite\", \"project_id\": \"cedar\", \"kind\": \"task\", \"title\": \"Review invitation\", \"detail\": \"Use the indoor room, not the garden.\", \"status\": \"open\", \"version\": 2, \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"next_action_id\": null, \"blocker\": \"\", \"dependencies\": [], \"progress_note\": \"\", \"completion_kind\": \"none\", \"verification_ref\": null, \"steps\": []}, \"project\": {\"id\": \"cedar\", \"name\": \"Cedar\", \"objective\": \"Prepare Cedar\", \"source_id\": \"source-invite\", \"quote\": \"For Cedar\", \"version\": 1}, \"source_label\": \"Direct priority choice in local workspace\", \"item_evidence\": [{\"item_id\": \"invite\", \"source_id\": \"source-invite\", \"quote\": \"For Cedar I will review the invitation.\"}, {\"item_id\": \"invite\", \"source_id\": \"corrected-source\", \"quote\": \"Correction for Cedar: use the indoor room, not the garden.\"}], \"next_action\": {\"id\": \"invite\", \"project_id\": \"cedar\", \"kind\": \"task\", \"title\": \"Review invitation\", \"detail\": \"Use the indoor room, not the garden.\", \"status\": \"open\", \"version\": 2, \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"next_action_id\": null, \"blocker\": \"\", \"dependencies\": [], \"progress_note\": \"\", \"completion_kind\": \"none\", \"verification_ref\": null, \"steps\": []}, \"actionable\": true, \"blockers\": [], \"unfinished_dependencies\": []}], \"inactive\": [], \"unranked\": [], \"next_action\": {\"id\": \"invite\", \"project_id\": \"cedar\", \"kind\": \"task\", \"title\": \"Review invitation\", \"detail\": \"Use the indoor room, not the garden.\", \"status\": \"open\", \"version\": 2, \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"next_action_id\": null, \"blocker\": \"\", \"dependencies\": [], \"progress_note\": \"\", \"completion_kind\": \"none\", \"verification_ref\": null, \"steps\": []}}, \"save_preferences\": {\"id\": 1, \"destination\": \"todo\", \"version\": 1, \"evidence\": \"Synthetic user explicitly enabled automatic capture for this test workspace.\", \"updated\": \"2026-10-31T07:45:47.303512+00:00\"}, \"coverage\": {\"workspace_complete\": false, \"query\": \"Cedar\", \"item_ids\": [\"invite\", \"venue\"], \"project_ids\": [\"cedar\"], \"priority_positions\": \"global ranks, matching items only\", \"note\": \"Other work is outside this read, not deleted. A miss requires broader matching before creating work.\"}}"
+                  }
+                ],
+                "structured_content": {
+                  "state": {
+                    "projects": [
+                      {
+                        "id": "cedar",
+                        "name": "Cedar",
+                        "objective": "Prepare Cedar",
+                        "source_id": "source-invite",
+                        "quote": "For Cedar",
+                        "version": 1
+                      }
+                    ],
+                    "items": [
+                      {
+                        "id": "invite",
+                        "project_id": "cedar",
+                        "kind": "task",
+                        "title": "Review invitation",
+                        "detail": "Use the indoor room, not the garden.",
+                        "status": "open",
+                        "version": 2,
+                        "created": "2026-10-31T07:45:47.292376+00:00",
+                        "next_action_id": null,
+                        "blocker": "",
+                        "dependencies": [],
+                        "progress_note": "",
+                        "completion_kind": "none",
+                        "verification_ref": null,
+                        "steps": []
+                      },
+                      {
+                        "id": "venue",
+                        "project_id": "cedar",
+                        "kind": "task",
+                        "title": "Verify venue",
+                        "detail": "Venue inspection",
+                        "status": "done",
+                        "version": 2,
+                        "created": "2026-10-31T07:45:47.295357+00:00",
+                        "next_action_id": null,
+                        "blocker": "",
+                        "dependencies": [],
+                        "progress_note": "",
+                        "completion_kind": "user_reported",
+                        "verification_ref": null,
+                        "steps": []
+                      }
+                    ],
+                    "sources": [
+                      {
+                        "id": "source-invite",
+                        "label": "User task capture",
+                        "text": "For Cedar I will review the invitation.",
+                        "created": "2026-10-31T07:45:47.291655+00:00",
+                        "processed": 1,
+                        "source_type": "user",
+                        "reference": null
+                      },
+                      {
+                        "id": "source-venue",
+                        "label": "User task capture",
+                        "text": "For Cedar I will verify the venue.",
+                        "created": "2026-10-31T07:45:47.295067+00:00",
+                        "processed": 1,
+                        "source_type": "user",
+                        "reference": null
+                      },
+                      {
+                        "id": "corrected-source",
+                        "label": "User task update",
+                        "text": "Correction for Cedar: use the indoor room, not the garden.",
+                        "created": "2026-10-31T07:45:47.299465+00:00",
+                        "processed": 1,
+                        "source_type": "user",
+                        "reference": null
+                      },
+                      {
+                        "id": "venue-done-source",
+                        "label": "User task update",
+                        "text": "The Cedar venue check is done.",
+                        "created": "2026-10-31T07:45:47.301106+00:00",
+                        "processed": 1,
+                        "source_type": "user",
+                        "reference": null
+                      },
+                      {
+                        "id": "priority:manual-rank",
+                        "label": "Direct priority choice in local workspace",
+                        "text": "My manual first choice",
+                        "created": "2026-10-31T07:45:47.302395+00:00",
+                        "processed": 1,
+                        "source_type": "user",
+                        "reference": null
+                      }
+                    ],
+                    "evidence": [
+                      {
+                        "item_id": "invite",
+                        "source_id": "source-invite",
+                        "quote": "For Cedar I will review the invitation."
+                      },
+                      {
+                        "item_id": "venue",
+                        "source_id": "source-venue",
+                        "quote": "For Cedar I will verify the venue."
+                      },
+                      {
+                        "item_id": "invite",
+                        "source_id": "corrected-source",
+                        "quote": "Correction for Cedar: use the indoor room, not the garden."
+                      },
+                      {
+                        "item_id": "venue",
+                        "source_id": "venue-done-source",
+                        "quote": "The Cedar venue check is done."
+                      }
+                    ],
+                    "events": [
+                      {
+                        "id": 1,
+                        "item_id": "invite",
+                        "source_id": "source-invite",
+                        "previous": null,
+                        "current": "{\"created\": \"2026-10-31T07:45:47.292376+00:00\", \"detail\": \"Use the garden.\", \"id\": \"invite\", \"kind\": \"task\", \"project_id\": \"cedar\", \"status\": \"open\", \"title\": \"Review invitation\", \"version\": 1}",
+                        "created": "2026-10-31T07:45:47.292459+00:00"
+                      },
+                      {
+                        "id": 2,
+                        "item_id": "venue",
+                        "source_id": "source-venue",
+                        "previous": null,
+                        "current": "{\"created\": \"2026-10-31T07:45:47.295357+00:00\", \"detail\": \"Venue inspection\", \"id\": \"venue\", \"kind\": \"task\", \"project_id\": \"cedar\", \"status\": \"open\", \"title\": \"Verify venue\", \"version\": 1}",
+                        "created": "2026-10-31T07:45:47.295676+00:00"
+                      },
+                      {
+                        "id": 4,
+                        "item_id": "invite",
+                        "source_id": "corrected-source",
+                        "previous": "{\"blocker\": \"\", \"completion_kind\": \"none\", \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"dependencies\": [], \"detail\": \"Use the garden.\", \"id\": \"invite\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"open\", \"steps\": [], \"title\": \"Review invitation\", \"verification_ref\": null, \"version\": 1}",
+                        "current": "{\"blocker\": \"\", \"completion_kind\": \"none\", \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"dependencies\": [], \"detail\": \"Use the indoor room, not the garden.\", \"id\": \"invite\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"open\", \"steps\": [], \"title\": \"Review invitation\", \"verification_ref\": null, \"version\": 2}",
+                        "created": "2026-10-31T07:45:47.299802+00:00"
+                      },
+                      {
+                        "id": 5,
+                        "item_id": "venue",
+                        "source_id": "venue-done-source",
+                        "previous": "{\"blocker\": \"\", \"completion_kind\": \"none\", \"created\": \"2026-10-31T07:45:47.295357+00:00\", \"dependencies\": [], \"detail\": \"Venue inspection\", \"id\": \"venue\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"open\", \"steps\": [], \"title\": \"Verify venue\", \"verification_ref\": null, \"version\": 1}",
+                        "current": "{\"blocker\": \"\", \"completion_kind\": \"user_reported\", \"created\": \"2026-10-31T07:45:47.295357+00:00\", \"dependencies\": [], \"detail\": \"Venue inspection\", \"id\": \"venue\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"done\", \"steps\": [], \"title\": \"Verify venue\", \"verification_ref\": null, \"version\": 2}",
+                        "created": "2026-10-31T07:45:47.301450+00:00"
+                      }
+                    ],
+                    "project_events": [],
+                    "boards": []
+                  },
+                  "priorities": {
+                    "version": 1,
+                    "confirmed": [
+                      {
+                        "item_id": "invite",
+                        "authority": "user",
+                        "position": 1,
+                        "reason": "My manual first choice",
+                        "due_date": null,
+                        "dependencies": [],
+                        "source_id": "priority:manual-rank",
+                        "quote": "My manual first choice",
+                        "updated": "2026-10-31T07:45:47.302524+00:00",
+                        "effective_dependencies": [],
+                        "item": {
+                          "id": "invite",
+                          "project_id": "cedar",
+                          "kind": "task",
+                          "title": "Review invitation",
+                          "detail": "Use the indoor room, not the garden.",
+                          "status": "open",
+                          "version": 2,
+                          "created": "2026-10-31T07:45:47.292376+00:00",
+                          "next_action_id": null,
+                          "blocker": "",
+                          "dependencies": [],
+                          "progress_note": "",
+                          "completion_kind": "none",
+                          "verification_ref": null,
+                          "steps": []
+                        },
+                        "project": {
+                          "id": "cedar",
+                          "name": "Cedar",
+                          "objective": "Prepare Cedar",
+                          "source_id": "source-invite",
+                          "quote": "For Cedar",
+                          "version": 1
+                        },
+                        "source_label": "Direct priority choice in local workspace",
+                        "item_evidence": [
+                          {
+                            "item_id": "invite",
+                            "source_id": "source-invite",
+                            "quote": "For Cedar I will review the invitation."
+                          },
+                          {
+                            "item_id": "invite",
+                            "source_id": "corrected-source",
+                            "quote": "Correction for Cedar: use the indoor room, not the garden."
+                          }
+                        ],
+                        "next_action": {
+                          "id": "invite",
+                          "project_id": "cedar",
+                          "kind": "task",
+                          "title": "Review invitation",
+                          "detail": "Use the indoor room, not the garden.",
+                          "status": "open",
+                          "version": 2,
+                          "created": "2026-10-31T07:45:47.292376+00:00",
+                          "next_action_id": null,
+                          "blocker": "",
+                          "dependencies": [],
+                          "progress_note": "",
+                          "completion_kind": "none",
+                          "verification_ref": null,
+                          "steps": []
+                        },
+                        "actionable": true,
+                        "blockers": [],
+                        "unfinished_dependencies": []
+                      }
+                    ],
+                    "recommendations": [],
+                    "effective_focus": [
+                      {
+                        "item_id": "invite",
+                        "authority": "user",
+                        "position": 1,
+                        "reason": "My manual first choice",
+                        "due_date": null,
+                        "dependencies": [],
+                        "source_id": "priority:manual-rank",
+                        "quote": "My manual first choice",
+                        "updated": "2026-10-31T07:45:47.302524+00:00",
+                        "effective_dependencies": [],
+                        "item": {
+                          "id": "invite",
+                          "project_id": "cedar",
+                          "kind": "task",
+                          "title": "Review invitation",
+                          "detail": "Use the indoor room, not the garden.",
+                          "status": "open",
+                          "version": 2,
+                          "created": "2026-10-31T07:45:47.292376+00:00",
+                          "next_action_id": null,
+                          "blocker": "",
+                          "dependencies": [],
+                          "progress_note": "",
+                          "completion_kind": "none",
+                          "verification_ref": null,
+                          "steps": []
+                        },
+                        "project": {
+                          "id": "cedar",
+                          "name": "Cedar",
+                          "objective": "Prepare Cedar",
+                          "source_id": "source-invite",
+                          "quote": "For Cedar",
+                          "version": 1
+                        },
+                        "source_label": "Direct priority choice in local workspace",
+                        "item_evidence": [
+                          {
+                            "item_id": "invite",
+                            "source_id": "source-invite",
+                            "quote": "For Cedar I will review the invitation."
+                          },
+                          {
+                            "item_id": "invite",
+                            "source_id": "corrected-source",
+                            "quote": "Correction for Cedar: use the indoor room, not the garden."
+                          }
+                        ],
+                        "next_action": {
+                          "id": "invite",
+                          "project_id": "cedar",
+                          "kind": "task",
+                          "title": "Review invitation",
+                          "detail": "Use the indoor room, not the garden.",
+                          "status": "open",
+                          "version": 2,
+                          "created": "2026-10-31T07:45:47.292376+00:00",
+                          "next_action_id": null,
+                          "blocker": "",
+                          "dependencies": [],
+                          "progress_note": "",
+                          "completion_kind": "none",
+                          "verification_ref": null,
+                          "steps": []
+                        },
+                        "actionable": true,
+                        "blockers": [],
+                        "unfinished_dependencies": []
+                      }
+                    ],
+                    "inactive": [],
+                    "unranked": [],
+                    "next_action": {
+                      "id": "invite",
+                      "project_id": "cedar",
+                      "kind": "task",
+                      "title": "Review invitation",
+                      "detail": "Use the indoor room, not the garden.",
+                      "status": "open",
+                      "version": 2,
+                      "created": "2026-10-31T07:45:47.292376+00:00",
+                      "next_action_id": null,
+                      "blocker": "",
+                      "dependencies": [],
+                      "progress_note": "",
+                      "completion_kind": "none",
+                      "verification_ref": null,
+                      "steps": []
+                    }
+                  },
+                  "save_preferences": {
+                    "id": 1,
+                    "destination": "todo",
+                    "version": 1,
+                    "evidence": "Synthetic user explicitly enabled automatic capture for this test workspace.",
+                    "updated": "2026-10-31T07:45:47.303512+00:00"
+                  },
+                  "coverage": {
+                    "workspace_complete": false,
+                    "query": "Cedar",
+                    "item_ids": [
+                      "invite",
+                      "venue"
+                    ],
+                    "project_ids": [
+                      "cedar"
+                    ],
+                    "priority_positions": "global ranks, matching items only",
+                    "note": "Other work is outside this read, not deleted. A miss requires broader matching before creating work."
+                  }
+                }
+              },
+              "error": null,
+              "status": "completed"
+            },
+            {
+              "id": "item_2",
+              "type": "mcp_tool_call",
+              "server": "todo",
+              "tool": "update_task",
+              "arguments": {
+                "item_id": "invite",
+                "version": 2,
+                "changes": {
+                  "status": "done"
+                },
+                "request_id": "M01:turn1:invite-done",
+                "source_id": "M01:turn1",
+                "user_statement": "For Cedar, I finished the invitation."
+              },
+              "result": null,
+              "error": {
+                "message": "MCP tool call requires approval, but approval policy is never"
+              },
+              "status": "failed"
+            }
+          ],
+          "answer": {
+            "text": "I couldn\u2019t mark Cedar\u2019s invitation done: the host blocked the update because approval is required but unavailable. It wasn\u2019t saved.",
+            "clarification": false,
+            "facts": []
+          },
+          "usage": {
+            "input_tokens": 121709,
+            "cached_input_tokens": 86144,
+            "cache_write_input_tokens": 0,
+            "output_tokens": 203,
+            "reasoning_output_tokens": 0
+          },
+          "raw_reference": "M01-trial1-turn1",
+          "model_metadata": []
+        }
+      ],
+      "requirements_sha256": "80e78dc3989dd9303b78b58b7bed5a1bbae96c3d3f7c6c5902538cea77cb2643",
+      "initial_state": {
+        "raw_result_sha256": "322cc00affaf7fb98544b05a2946563f3858609bdcfb400a7e95aafc2fe2a884",
+        "projection": {
+          "state": {
+            "projects": [
+              {
+                "id": "cedar",
+                "name": "Cedar",
+                "objective": "Prepare Cedar",
+                "source_id": "source-invite",
+                "quote": "For Cedar",
+                "version": 1
+              },
+              {
+                "id": "birch",
+                "name": "Birch",
+                "objective": "Prepare Birch",
+                "source_id": "source-noise",
+                "quote": "For Birch",
+                "version": 1
+              }
+            ],
+            "items": [
+              {
+                "id": "invite",
+                "project_id": "cedar",
+                "kind": "task",
+                "title": "Review invitation",
+                "detail": "Use the indoor room, not the garden.",
+                "status": "open",
+                "version": 2,
+                "created": "2026-10-31T07:45:47.292376+00:00",
+                "next_action_id": null,
+                "blocker": "",
+                "dependencies": [],
+                "progress_note": "",
+                "completion_kind": "none",
+                "verification_ref": null,
+                "steps": []
+              },
+              {
+                "id": "venue",
+                "project_id": "cedar",
+                "kind": "task",
+                "title": "Verify venue",
+                "detail": "Venue inspection",
+                "status": "done",
+                "version": 2,
+                "created": "2026-10-31T07:45:47.295357+00:00",
+                "next_action_id": null,
+                "blocker": "",
+                "dependencies": [],
+                "progress_note": "",
+                "completion_kind": "user_reported",
+                "verification_ref": null,
+                "steps": []
+              },
+              {
+                "id": "noise",
+                "project_id": "birch",
+                "kind": "task",
+                "title": "Review invitation",
+                "detail": "[Synthetic distractor repeated 1500 times; regenerate with seed()]",
+                "status": "open",
+                "version": 1,
+                "created": "2026-10-31T07:45:47.298203+00:00",
+                "next_action_id": null,
+                "blocker": "",
+                "dependencies": [],
+                "progress_note": "",
+                "completion_kind": "none",
+                "verification_ref": null,
+                "steps": []
+              }
+            ],
+            "sources": [
+              {
+                "id": "source-invite",
+                "label": "User task capture",
+                "text": "For Cedar I will review the invitation.",
+                "created": "2026-10-31T07:45:47.291655+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              },
+              {
+                "id": "source-venue",
+                "label": "User task capture",
+                "text": "For Cedar I will verify the venue.",
+                "created": "2026-10-31T07:45:47.295067+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              },
+              {
+                "id": "source-noise",
+                "label": "User task capture",
+                "text": "For Birch I will review the invitation.",
+                "created": "2026-10-31T07:45:47.297978+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              },
+              {
+                "id": "corrected-source",
+                "label": "User task update",
+                "text": "Correction for Cedar: use the indoor room, not the garden.",
+                "created": "2026-10-31T07:45:47.299465+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              },
+              {
+                "id": "venue-done-source",
+                "label": "User task update",
+                "text": "The Cedar venue check is done.",
+                "created": "2026-10-31T07:45:47.301106+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              },
+              {
+                "id": "priority:manual-rank",
+                "label": "Direct priority choice in local workspace",
+                "text": "My manual first choice",
+                "created": "2026-10-31T07:45:47.302395+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              }
+            ],
+            "evidence": [
+              {
+                "item_id": "invite",
+                "source_id": "source-invite",
+                "quote": "For Cedar I will review the invitation."
+              },
+              {
+                "item_id": "venue",
+                "source_id": "source-venue",
+                "quote": "For Cedar I will verify the venue."
+              },
+              {
+                "item_id": "noise",
+                "source_id": "source-noise",
+                "quote": "For Birch I will review the invitation."
+              },
+              {
+                "item_id": "invite",
+                "source_id": "corrected-source",
+                "quote": "Correction for Cedar: use the indoor room, not the garden."
+              },
+              {
+                "item_id": "venue",
+                "source_id": "venue-done-source",
+                "quote": "The Cedar venue check is done."
+              }
+            ],
+            "events": [
+              {
+                "id": 1,
+                "item_id": "invite",
+                "source_id": "source-invite",
+                "previous": null,
+                "current": "{\"created\": \"2026-10-31T07:45:47.292376+00:00\", \"detail\": \"Use the garden.\", \"id\": \"invite\", \"kind\": \"task\", \"project_id\": \"cedar\", \"status\": \"open\", \"title\": \"Review invitation\", \"version\": 1}",
+                "created": "2026-10-31T07:45:47.292459+00:00"
+              },
+              {
+                "id": 2,
+                "item_id": "venue",
+                "source_id": "source-venue",
+                "previous": null,
+                "current": "{\"created\": \"2026-10-31T07:45:47.295357+00:00\", \"detail\": \"Venue inspection\", \"id\": \"venue\", \"kind\": \"task\", \"project_id\": \"cedar\", \"status\": \"open\", \"title\": \"Verify venue\", \"version\": 1}",
+                "created": "2026-10-31T07:45:47.295676+00:00"
+              },
+              {
+                "id": 3,
+                "item_id": "noise",
+                "source_id": "source-noise",
+                "previous": null,
+                "current": "{\"created\": \"2026-10-31T07:45:47.298203+00:00\", \"detail\": \"[Synthetic distractor repeated 1500 times; regenerate with seed()]\", \"id\": \"noise\", \"kind\": \"task\", \"project_id\": \"birch\", \"status\": \"open\", \"title\": \"Review invitation\", \"version\": 1}",
+                "created": "2026-10-31T07:45:47.298353+00:00"
+              },
+              {
+                "id": 4,
+                "item_id": "invite",
+                "source_id": "corrected-source",
+                "previous": "{\"blocker\": \"\", \"completion_kind\": \"none\", \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"dependencies\": [], \"detail\": \"Use the garden.\", \"id\": \"invite\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"open\", \"steps\": [], \"title\": \"Review invitation\", \"verification_ref\": null, \"version\": 1}",
+                "current": "{\"blocker\": \"\", \"completion_kind\": \"none\", \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"dependencies\": [], \"detail\": \"Use the indoor room, not the garden.\", \"id\": \"invite\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"open\", \"steps\": [], \"title\": \"Review invitation\", \"verification_ref\": null, \"version\": 2}",
+                "created": "2026-10-31T07:45:47.299802+00:00"
+              },
+              {
+                "id": 5,
+                "item_id": "venue",
+                "source_id": "venue-done-source",
+                "previous": "{\"blocker\": \"\", \"completion_kind\": \"none\", \"created\": \"2026-10-31T07:45:47.295357+00:00\", \"dependencies\": [], \"detail\": \"Venue inspection\", \"id\": \"venue\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"open\", \"steps\": [], \"title\": \"Verify venue\", \"verification_ref\": null, \"version\": 1}",
+                "current": "{\"blocker\": \"\", \"completion_kind\": \"user_reported\", \"created\": \"2026-10-31T07:45:47.295357+00:00\", \"dependencies\": [], \"detail\": \"Venue inspection\", \"id\": \"venue\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"done\", \"steps\": [], \"title\": \"Verify venue\", \"verification_ref\": null, \"version\": 2}",
+                "created": "2026-10-31T07:45:47.301450+00:00"
+              }
+            ],
+            "project_events": [],
+            "boards": []
+          },
+          "priorities": {
+            "version": 1,
+            "confirmed": [
+              {
+                "item_id": "invite",
+                "authority": "user",
+                "position": 1,
+                "reason": "My manual first choice",
+                "due_date": null,
+                "dependencies": [],
+                "source_id": "priority:manual-rank",
+                "quote": "My manual first choice",
+                "updated": "2026-10-31T07:45:47.302524+00:00",
+                "effective_dependencies": [],
+                "item": {
+                  "id": "invite",
+                  "project_id": "cedar",
+                  "kind": "task",
+                  "title": "Review invitation",
+                  "detail": "Use the indoor room, not the garden.",
+                  "status": "open",
+                  "version": 2,
+                  "created": "2026-10-31T07:45:47.292376+00:00",
+                  "next_action_id": null,
+                  "blocker": "",
+                  "dependencies": [],
+                  "progress_note": "",
+                  "completion_kind": "none",
+                  "verification_ref": null,
+                  "steps": []
+                },
+                "project": {
+                  "id": "cedar",
+                  "name": "Cedar",
+                  "objective": "Prepare Cedar",
+                  "source_id": "source-invite",
+                  "quote": "For Cedar",
+                  "version": 1
+                },
+                "source_label": "Direct priority choice in local workspace",
+                "item_evidence": [
+                  {
+                    "item_id": "invite",
+                    "source_id": "source-invite",
+                    "quote": "For Cedar I will review the invitation."
+                  },
+                  {
+                    "item_id": "invite",
+                    "source_id": "corrected-source",
+                    "quote": "Correction for Cedar: use the indoor room, not the garden."
+                  }
+                ],
+                "next_action": {
+                  "id": "invite",
+                  "project_id": "cedar",
+                  "kind": "task",
+                  "title": "Review invitation",
+                  "detail": "Use the indoor room, not the garden.",
+                  "status": "open",
+                  "version": 2,
+                  "created": "2026-10-31T07:45:47.292376+00:00",
+                  "next_action_id": null,
+                  "blocker": "",
+                  "dependencies": [],
+                  "progress_note": "",
+                  "completion_kind": "none",
+                  "verification_ref": null,
+                  "steps": []
+                },
+                "actionable": true,
+                "blockers": [],
+                "unfinished_dependencies": []
+              }
+            ],
+            "recommendations": [],
+            "unranked": [
+              {
+                "id": "noise",
+                "project_id": "birch",
+                "kind": "task",
+                "title": "Review invitation",
+                "detail": "Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. ",
+                "status": "open",
+                "version": 1,
+                "created": "2026-10-31T07:45:47.298203+00:00",
+                "next_action_id": null,
+                "blocker": "",
+                "dependencies": [],
+                "progress_note": "",
+                "completion_kind": "none",
+                "verification_ref": null,
+                "steps": []
+              }
+            ],
+            "inactive": [],
+            "coverage": "Local captured records only; not a complete backlog.",
+            "monitor_policy": "confirmed_only",
+            "effective_focus": [
+              {
+                "item_id": "invite",
+                "authority": "user",
+                "position": 1,
+                "reason": "My manual first choice",
+                "due_date": null,
+                "dependencies": [],
+                "source_id": "priority:manual-rank",
+                "quote": "My manual first choice",
+                "updated": "2026-10-31T07:45:47.302524+00:00",
+                "effective_dependencies": [],
+                "item": {
+                  "id": "invite",
+                  "project_id": "cedar",
+                  "kind": "task",
+                  "title": "Review invitation",
+                  "detail": "Use the indoor room, not the garden.",
+                  "status": "open",
+                  "version": 2,
+                  "created": "2026-10-31T07:45:47.292376+00:00",
+                  "next_action_id": null,
+                  "blocker": "",
+                  "dependencies": [],
+                  "progress_note": "",
+                  "completion_kind": "none",
+                  "verification_ref": null,
+                  "steps": []
+                },
+                "project": {
+                  "id": "cedar",
+                  "name": "Cedar",
+                  "objective": "Prepare Cedar",
+                  "source_id": "source-invite",
+                  "quote": "For Cedar",
+                  "version": 1
+                },
+                "source_label": "Direct priority choice in local workspace",
+                "item_evidence": [
+                  {
+                    "item_id": "invite",
+                    "source_id": "source-invite",
+                    "quote": "For Cedar I will review the invitation."
+                  },
+                  {
+                    "item_id": "invite",
+                    "source_id": "corrected-source",
+                    "quote": "Correction for Cedar: use the indoor room, not the garden."
+                  }
+                ],
+                "next_action": {
+                  "id": "invite",
+                  "project_id": "cedar",
+                  "kind": "task",
+                  "title": "Review invitation",
+                  "detail": "Use the indoor room, not the garden.",
+                  "status": "open",
+                  "version": 2,
+                  "created": "2026-10-31T07:45:47.292376+00:00",
+                  "next_action_id": null,
+                  "blocker": "",
+                  "dependencies": [],
+                  "progress_note": "",
+                  "completion_kind": "none",
+                  "verification_ref": null,
+                  "steps": []
+                },
+                "actionable": true,
+                "blockers": [],
+                "unfinished_dependencies": []
+              }
+            ],
+            "next_action": {
+              "id": "invite",
+              "project_id": "cedar",
+              "kind": "task",
+              "title": "Review invitation",
+              "detail": "Use the indoor room, not the garden.",
+              "status": "open",
+              "version": 2,
+              "created": "2026-10-31T07:45:47.292376+00:00",
+              "next_action_id": null,
+              "blocker": "",
+              "dependencies": [],
+              "progress_note": "",
+              "completion_kind": "none",
+              "verification_ref": null,
+              "steps": []
+            },
+            "alignment_ready": true,
+            "gap": null,
+            "fingerprint": "5402fdc6d10b86c2ad2f8abcbc4269baf3e306e15528812742f5e266602f3cb4",
+            "schedule_status": "not_configured",
+            "monitor": {
+              "schedule_status": "not_configured",
+              "automation_id": "hourly-priority-monitor",
+              "last_check": null,
+              "alignment_status": "not_checked"
+            }
+          },
+          "save_preferences": {
+            "id": 1,
+            "destination": "todo",
+            "version": 1,
+            "evidence": "Synthetic user explicitly enabled automatic capture for this test workspace.",
+            "updated": "2026-10-31T07:45:47.303512+00:00"
+          }
+        },
+        "omitted": "Repeated synthetic distractor detail only; complete fixture is reproducible."
+      },
+      "starting_db_sha256": "c26b1cb1fb4eb6d4f8427f94ee8c4861add7c0381dc3676c8ae2338694f139c4",
+      "checks": {
+        "status": false,
+        "new_items": true,
+        "manual_priorities": true,
+        "preserved_closed": true,
+        "no_unrelated_changes": true,
+        "evidence": true,
+        "stable_ids": true,
+        "all_unrelated_items_preserved": true,
+        "projects_preserved": true,
+        "original_text_immutable": true,
+        "manual_choice_preserved": true,
+        "only_authorized_tools": true,
+        "read_before_write": true,
+        "read_after_write": false,
+        "no_tool_errors": false
+      },
+      "final_state": {
+        "raw_result_sha256": "322cc00affaf7fb98544b05a2946563f3858609bdcfb400a7e95aafc2fe2a884",
+        "projection": {
+          "state": {
+            "projects": [
+              {
+                "id": "cedar",
+                "name": "Cedar",
+                "objective": "Prepare Cedar",
+                "source_id": "source-invite",
+                "quote": "For Cedar",
+                "version": 1
+              },
+              {
+                "id": "birch",
+                "name": "Birch",
+                "objective": "Prepare Birch",
+                "source_id": "source-noise",
+                "quote": "For Birch",
+                "version": 1
+              }
+            ],
+            "items": [
+              {
+                "id": "invite",
+                "project_id": "cedar",
+                "kind": "task",
+                "title": "Review invitation",
+                "detail": "Use the indoor room, not the garden.",
+                "status": "open",
+                "version": 2,
+                "created": "2026-10-31T07:45:47.292376+00:00",
+                "next_action_id": null,
+                "blocker": "",
+                "dependencies": [],
+                "progress_note": "",
+                "completion_kind": "none",
+                "verification_ref": null,
+                "steps": []
+              },
+              {
+                "id": "venue",
+                "project_id": "cedar",
+                "kind": "task",
+                "title": "Verify venue",
+                "detail": "Venue inspection",
+                "status": "done",
+                "version": 2,
+                "created": "2026-10-31T07:45:47.295357+00:00",
+                "next_action_id": null,
+                "blocker": "",
+                "dependencies": [],
+                "progress_note": "",
+                "completion_kind": "user_reported",
+                "verification_ref": null,
+                "steps": []
+              },
+              {
+                "id": "noise",
+                "project_id": "birch",
+                "kind": "task",
+                "title": "Review invitation",
+                "detail": "[Synthetic distractor repeated 1500 times; regenerate with seed()]",
+                "status": "open",
+                "version": 1,
+                "created": "2026-10-31T07:45:47.298203+00:00",
+                "next_action_id": null,
+                "blocker": "",
+                "dependencies": [],
+                "progress_note": "",
+                "completion_kind": "none",
+                "verification_ref": null,
+                "steps": []
+              }
+            ],
+            "sources": [
+              {
+                "id": "source-invite",
+                "label": "User task capture",
+                "text": "For Cedar I will review the invitation.",
+                "created": "2026-10-31T07:45:47.291655+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              },
+              {
+                "id": "source-venue",
+                "label": "User task capture",
+                "text": "For Cedar I will verify the venue.",
+                "created": "2026-10-31T07:45:47.295067+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              },
+              {
+                "id": "source-noise",
+                "label": "User task capture",
+                "text": "For Birch I will review the invitation.",
+                "created": "2026-10-31T07:45:47.297978+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              },
+              {
+                "id": "corrected-source",
+                "label": "User task update",
+                "text": "Correction for Cedar: use the indoor room, not the garden.",
+                "created": "2026-10-31T07:45:47.299465+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              },
+              {
+                "id": "venue-done-source",
+                "label": "User task update",
+                "text": "The Cedar venue check is done.",
+                "created": "2026-10-31T07:45:47.301106+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              },
+              {
+                "id": "priority:manual-rank",
+                "label": "Direct priority choice in local workspace",
+                "text": "My manual first choice",
+                "created": "2026-10-31T07:45:47.302395+00:00",
+                "processed": 1,
+                "source_type": "user",
+                "reference": null
+              }
+            ],
+            "evidence": [
+              {
+                "item_id": "invite",
+                "source_id": "source-invite",
+                "quote": "For Cedar I will review the invitation."
+              },
+              {
+                "item_id": "venue",
+                "source_id": "source-venue",
+                "quote": "For Cedar I will verify the venue."
+              },
+              {
+                "item_id": "noise",
+                "source_id": "source-noise",
+                "quote": "For Birch I will review the invitation."
+              },
+              {
+                "item_id": "invite",
+                "source_id": "corrected-source",
+                "quote": "Correction for Cedar: use the indoor room, not the garden."
+              },
+              {
+                "item_id": "venue",
+                "source_id": "venue-done-source",
+                "quote": "The Cedar venue check is done."
+              }
+            ],
+            "events": [
+              {
+                "id": 1,
+                "item_id": "invite",
+                "source_id": "source-invite",
+                "previous": null,
+                "current": "{\"created\": \"2026-10-31T07:45:47.292376+00:00\", \"detail\": \"Use the garden.\", \"id\": \"invite\", \"kind\": \"task\", \"project_id\": \"cedar\", \"status\": \"open\", \"title\": \"Review invitation\", \"version\": 1}",
+                "created": "2026-10-31T07:45:47.292459+00:00"
+              },
+              {
+                "id": 2,
+                "item_id": "venue",
+                "source_id": "source-venue",
+                "previous": null,
+                "current": "{\"created\": \"2026-10-31T07:45:47.295357+00:00\", \"detail\": \"Venue inspection\", \"id\": \"venue\", \"kind\": \"task\", \"project_id\": \"cedar\", \"status\": \"open\", \"title\": \"Verify venue\", \"version\": 1}",
+                "created": "2026-10-31T07:45:47.295676+00:00"
+              },
+              {
+                "id": 3,
+                "item_id": "noise",
+                "source_id": "source-noise",
+                "previous": null,
+                "current": "{\"created\": \"2026-10-31T07:45:47.298203+00:00\", \"detail\": \"[Synthetic distractor repeated 1500 times; regenerate with seed()]\", \"id\": \"noise\", \"kind\": \"task\", \"project_id\": \"birch\", \"status\": \"open\", \"title\": \"Review invitation\", \"version\": 1}",
+                "created": "2026-10-31T07:45:47.298353+00:00"
+              },
+              {
+                "id": 4,
+                "item_id": "invite",
+                "source_id": "corrected-source",
+                "previous": "{\"blocker\": \"\", \"completion_kind\": \"none\", \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"dependencies\": [], \"detail\": \"Use the garden.\", \"id\": \"invite\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"open\", \"steps\": [], \"title\": \"Review invitation\", \"verification_ref\": null, \"version\": 1}",
+                "current": "{\"blocker\": \"\", \"completion_kind\": \"none\", \"created\": \"2026-10-31T07:45:47.292376+00:00\", \"dependencies\": [], \"detail\": \"Use the indoor room, not the garden.\", \"id\": \"invite\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"open\", \"steps\": [], \"title\": \"Review invitation\", \"verification_ref\": null, \"version\": 2}",
+                "created": "2026-10-31T07:45:47.299802+00:00"
+              },
+              {
+                "id": 5,
+                "item_id": "venue",
+                "source_id": "venue-done-source",
+                "previous": "{\"blocker\": \"\", \"completion_kind\": \"none\", \"created\": \"2026-10-31T07:45:47.295357+00:00\", \"dependencies\": [], \"detail\": \"Venue inspection\", \"id\": \"venue\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"open\", \"steps\": [], \"title\": \"Verify venue\", \"verification_ref\": null, \"version\": 1}",
+                "current": "{\"blocker\": \"\", \"completion_kind\": \"user_reported\", \"created\": \"2026-10-31T07:45:47.295357+00:00\", \"dependencies\": [], \"detail\": \"Venue inspection\", \"id\": \"venue\", \"kind\": \"task\", \"next_action_id\": null, \"progress_note\": \"\", \"project_id\": \"cedar\", \"status\": \"done\", \"steps\": [], \"title\": \"Verify venue\", \"verification_ref\": null, \"version\": 2}",
+                "created": "2026-10-31T07:45:47.301450+00:00"
+              }
+            ],
+            "project_events": [],
+            "boards": []
+          },
+          "priorities": {
+            "version": 1,
+            "confirmed": [
+              {
+                "item_id": "invite",
+                "authority": "user",
+                "position": 1,
+                "reason": "My manual first choice",
+                "due_date": null,
+                "dependencies": [],
+                "source_id": "priority:manual-rank",
+                "quote": "My manual first choice",
+                "updated": "2026-10-31T07:45:47.302524+00:00",
+                "effective_dependencies": [],
+                "item": {
+                  "id": "invite",
+                  "project_id": "cedar",
+                  "kind": "task",
+                  "title": "Review invitation",
+                  "detail": "Use the indoor room, not the garden.",
+                  "status": "open",
+                  "version": 2,
+                  "created": "2026-10-31T07:45:47.292376+00:00",
+                  "next_action_id": null,
+                  "blocker": "",
+                  "dependencies": [],
+                  "progress_note": "",
+                  "completion_kind": "none",
+                  "verification_ref": null,
+                  "steps": []
+                },
+                "project": {
+                  "id": "cedar",
+                  "name": "Cedar",
+                  "objective": "Prepare Cedar",
+                  "source_id": "source-invite",
+                  "quote": "For Cedar",
+                  "version": 1
+                },
+                "source_label": "Direct priority choice in local workspace",
+                "item_evidence": [
+                  {
+                    "item_id": "invite",
+                    "source_id": "source-invite",
+                    "quote": "For Cedar I will review the invitation."
+                  },
+                  {
+                    "item_id": "invite",
+                    "source_id": "corrected-source",
+                    "quote": "Correction for Cedar: use the indoor room, not the garden."
+                  }
+                ],
+                "next_action": {
+                  "id": "invite",
+                  "project_id": "cedar",
+                  "kind": "task",
+                  "title": "Review invitation",
+                  "detail": "Use the indoor room, not the garden.",
+                  "status": "open",
+                  "version": 2,
+                  "created": "2026-10-31T07:45:47.292376+00:00",
+                  "next_action_id": null,
+                  "blocker": "",
+                  "dependencies": [],
+                  "progress_note": "",
+                  "completion_kind": "none",
+                  "verification_ref": null,
+                  "steps": []
+                },
+                "actionable": true,
+                "blockers": [],
+                "unfinished_dependencies": []
+              }
+            ],
+            "recommendations": [],
+            "unranked": [
+              {
+                "id": "noise",
+                "project_id": "birch",
+                "kind": "task",
+                "title": "Review invitation",
+                "detail": "Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. Distractor text. ",
+                "status": "open",
+                "version": 1,
+                "created": "2026-10-31T07:45:47.298203+00:00",
+                "next_action_id": null,
+                "blocker": "",
+                "dependencies": [],
+                "progress_note": "",
+                "completion_kind": "none",
+                "verification_ref": null,
+                "steps": []
+              }
+            ],
+            "inactive": [],
+            "coverage": "Local captured records only; not a complete backlog.",
+            "monitor_policy": "confirmed_only",
+            "effective_focus": [
+              {
+                "item_id": "invite",
+                "authority": "user",
+                "position": 1,
+                "reason": "My manual first choice",
+                "due_date": null,
+                "dependencies": [],
+                "source_id": "priority:manual-rank",
+                "quote": "My manual first choice",
+                "updated": "2026-10-31T07:45:47.302524+00:00",
+                "effective_dependencies": [],
+                "item": {
+                  "id": "invite",
+                  "project_id": "cedar",
+                  "kind": "task",
+                  "title": "Review invitation",
+                  "detail": "Use the indoor room, not the garden.",
+                  "status": "open",
+                  "version": 2,
+                  "created": "2026-10-31T07:45:47.292376+00:00",
+                  "next_action_id": null,
+                  "blocker": "",
+                  "dependencies": [],
+                  "progress_note": "",
+                  "completion_kind": "none",
+                  "verification_ref": null,
+                  "steps": []
+                },
+                "project": {
+                  "id": "cedar",
+                  "name": "Cedar",
+                  "objective": "Prepare Cedar",
+                  "source_id": "source-invite",
+                  "quote": "For Cedar",
+                  "version": 1
+                },
+                "source_label": "Direct priority choice in local workspace",
+                "item_evidence": [
+                  {
+                    "item_id": "invite",
+                    "source_id": "source-invite",
+                    "quote": "For Cedar I will review the invitation."
+                  },
+                  {
+                    "item_id": "invite",
+                    "source_id": "corrected-source",
+                    "quote": "Correction for Cedar: use the indoor room, not the garden."
+                  }
+                ],
+                "next_action": {
+                  "id": "invite",
+                  "project_id": "cedar",
+                  "kind": "task",
+                  "title": "Review invitation",
+                  "detail": "Use the indoor room, not the garden.",
+                  "status": "open",
+                  "version": 2,
+                  "created": "2026-10-31T07:45:47.292376+00:00",
+                  "next_action_id": null,
+                  "blocker": "",
+                  "dependencies": [],
+                  "progress_note": "",
+                  "completion_kind": "none",
+                  "verification_ref": null,
+                  "steps": []
+                },
+                "actionable": true,
+                "blockers": [],
+                "unfinished_dependencies": []
+              }
+            ],
+            "next_action": {
+              "id": "invite",
+              "project_id": "cedar",
+              "kind": "task",
+              "title": "Review invitation",
+              "detail": "Use the indoor room, not the garden.",
+              "status": "open",
+              "version": 2,
+              "created": "2026-10-31T07:45:47.292376+00:00",
+              "next_action_id": null,
+              "blocker": "",
+              "dependencies": [],
+              "progress_note": "",
+              "completion_kind": "none",
+              "verification_ref": null,
+              "steps": []
+            },
+            "alignment_ready": true,
+            "gap": null,
+            "fingerprint": "5402fdc6d10b86c2ad2f8abcbc4269baf3e306e15528812742f5e266602f3cb4",
+            "schedule_status": "not_configured",
+            "monitor": {
+              "schedule_status": "not_configured",
+              "automation_id": "hourly-priority-monitor",
+              "last_check": null,
+              "alignment_status": "not_checked"
+            }
+          },
+          "save_preferences": {
+            "id": 1,
+            "destination": "todo",
+            "version": 1,
+            "evidence": "Synthetic user explicitly enabled automatic capture for this test workspace.",
+            "updated": "2026-10-31T07:45:47.303512+00:00"
+          }
+        },
+        "omitted": "Repeated synthetic distractor detail only; complete fixture is reproducible."
+      },
+      "tool_schema_sha256": "b4f3f3bf3de40087349fadbadbcf66db766b6b0c2a964579fb98d1c2823263ea"
+    }
+  ],
+  "api_dollar_cost": null,
+  "model_selection": "CLI default with user config ignored; actual metadata retained when emitted; no model override",
+  "summary": {
+    "pass": 0,
+    "fail": 1,
+    "inconclusive": 0
+  }
+}

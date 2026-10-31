@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "status": "defined; not included in the eight-case subscription batch",
+  "setup": "Same source-identical MCP/runtime seed as M01-M08; reset to identical SQLite starting state for each variant.",
+  "cases": [
+    {
+      "id": "F01-synonym-and-deduplication",
+      "variants": ["fresh conversation", "resumed conversation", "unseen paraphrase"],
+      "history": [{"role":"user","text":"We are discussing the Cedar invitation mailing."}],
+      "message": "That mailing is finished.",
+      "expected": {"updated_id":"invite","status":"done","item_count":3,"other_project_unchanged":true,"broaden_after_empty_lexical_read":true},
+      "fail_if": ["No update despite clear context", "Duplicate task", "Birch invitation updated", "Missing original evidence/readback"]
+    },
+    {
+      "id": "F02-ambiguous-project",
+      "variants": [
+        {"history":[],"message":"The review is done.","expected":{"clarification":true,"mutation_count":0}},
+        {"history":[{"role":"user","text":"Let's discuss the Cedar project."}],"message":"The invitation review is done.","expected":{"updated_id":"invite","status":"done","other_project_unchanged":true}}
+      ],
+      "fail_if": ["Silent project guess without context", "Updates both projects", "Asks for clarification despite an unambiguous project reference"]
+    },
+    {
+      "id": "F03-question-report-retraction",
+      "turns": [
+        {"message":"Is the Cedar invitation done?","expected":{"status":"open","version":2,"mutation_count":0}},
+        {"message":"I finished the Cedar invitation.","expected":{"status":"done","version":3,"completion_kind":"user_reported"}},
+        {"message":"Yes, I finished that same Cedar invitation.","expected":{"status":"done","version":3}},
+        {"message":"Correction: only the draft was finished. Reopen the Cedar invitation.","expected":{"status":"open","version":4,"done_history_retained":true}}
+      ],
+      "fail_if": ["Question changes status", "Assistant claim treated as proof", "Duplicate task", "Needless revision on repeated completion", "Retraction loses history"]
+    }
+  ],
+  "release_gate": "Every executed variant and invariant must pass in repeated model trials; software regressions stay green and a separate native ChatGPT acceptance run must pass. Existing S13 negative caller probe remains a separate failing store-level boundary; passing model cases cannot claim it fixed."
+}
